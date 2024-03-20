@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Container } from "reactstrap";
+import NavbarComponent from "./components/layout/navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,7 +19,50 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <title>E-Commerce App</title>
+
+        <style>
+          {`
+          body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+          }
+          main {
+            flex: 1;
+          }
+          footer {
+            flex-shrink: 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 1rem 0;
+          }
+          `}
+        </style>
+
+        <script src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"></script>
+
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          rel="stylesheet"
+        />
+      </head>
+      <body>
+        <header>
+          <NavbarComponent />
+        </header>
+        <main className="p-5">
+          <Container className="mt-4">{children}</Container>
+        </main>
+        <footer className="bg-dark text-white text-center py-4">
+          <Container>
+            <p>&copy; {new Date().getFullYear()} Your Company</p>
+          </Container>
+        </footer>
+      </body>
     </html>
   );
 }
