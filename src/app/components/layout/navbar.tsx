@@ -69,7 +69,7 @@ function NavbarComponent() {
                       top: "-8px",
                       right: "-8px",
                       background: "red",
-                      color: "white",
+                      color: "whitact-be",
                       borderRadius: "50%",
                       padding: "5px",
                       fontSize: "12px",
