@@ -68,9 +68,7 @@ const TableComponent = <T extends Record<string, any>>({
           <tr key={rowIndex}>
             {columns.map((column) => (
               <td key={column.key.toString()}>
-                {column.render
-                  ? column.render(row[column.key])
-                  : row[column.key]}
+                {column.render ? column.render(row) : row[column.key]}
               </td>
             ))}
           </tr>

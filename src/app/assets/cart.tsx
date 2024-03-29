@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/app/components/button";
+import { useShoppingCart } from "../providers/cart";
 
 export type CartItem = {
   productId: number;
@@ -24,13 +25,17 @@ export const cartColumns: ColumnType<CartItem>[] = [
   {
     key: "actions",
     label: "Actions",
-    render: (item) => (
-      <Button
-        onClick={() => console.log(item.productId)}
-        label="Remove"
-        variant="danger"
-      />
-    ),
+    render: (item) => {
+      const { removeItem } = useShoppingCart();
+
+      return (
+        <Button
+          onClick={() => removeItem(item.productId.toString())}
+          label="Remove"
+          variant="danger"
+        />
+      );
+    },
   },
 ];
 
