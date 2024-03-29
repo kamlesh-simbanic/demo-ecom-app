@@ -3,18 +3,25 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { Product } from "../assets/products";
+import Link from "next/link";
+import { useShoppingCart } from "../providers/cart";
 
 const ProductCard = (props: Product) => {
-  const { name, shortDesc, price } = props;
+  const { id, name, shortDesc, price } = props;
+  const { addItem } = useShoppingCart();
   return (
     <>
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src={"/images/image1.jpg"} />
         <Card.Body>
-          <Card.Title>{name}</Card.Title>
+          <Link href={`/products/${id}`}>
+            <Card.Title>{name}</Card.Title>
+          </Link>
           <Card.Text>{shortDesc}</Card.Text>
           <Card.Text>{price}</Card.Text>
-          <Button variant="primary">Add Cart</Button>
+          <Button variant="primary" onClick={() => addItem(id)}>
+            Add Cart
+          </Button>
         </Card.Body>
       </Card>
     </>

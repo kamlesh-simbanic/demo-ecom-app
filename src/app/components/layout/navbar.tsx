@@ -1,19 +1,21 @@
 "use client";
 
+import { useShoppingCart } from "@/app/providers/cart";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Navbar, Form, FormControl, Container, Nav } from "react-bootstrap";
 
 function NavbarComponent() {
+  const { totalItems } = useShoppingCart();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
   const [showSearch, setShowSearch] = useState(false);
 
-  const totalItems = 0;
+  // const totalItems = 0;
 
-  const isAuthenticated = false;
+  const isAuthenticated = true;
 
   return (
     <Navbar bg="light" expand="lg" fixed="top">
