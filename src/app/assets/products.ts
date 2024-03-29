@@ -4,6 +4,16 @@ export type Product = {
   price: number;
   shortDesc: string;
   imageUrl: string;
+  quantity: number;
+};
+
+export const initialProduct = {
+  id: "",
+  name: "",
+  price: 0,
+  shortDesc: "",
+  imageUrl: "",
+  quantity: 0,
 };
 
 export const products: Product[] = [
@@ -13,6 +23,7 @@ export const products: Product[] = [
     price: 10.99,
     shortDesc: "Short description for Product 1",
     imageUrl: "/images/product1.jpg",
+    quantity: 1,
   },
   {
     id: "2",
@@ -20,6 +31,7 @@ export const products: Product[] = [
     price: 19.99,
     shortDesc: "Short description for Product 2",
     imageUrl: "/images/product2.jpg",
+    quantity: 1,
   },
   {
     id: "3",
@@ -27,6 +39,7 @@ export const products: Product[] = [
     price: 15.49,
     shortDesc: "Short description for Product 3",
     imageUrl: "/images/product3.jpg",
+    quantity: 1,
   },
   {
     id: "4",
@@ -34,6 +47,7 @@ export const products: Product[] = [
     price: 12.99,
     shortDesc: "Short description for Product 4",
     imageUrl: "/images/product4.jpg",
+    quantity: 1,
   },
   {
     id: "5",
@@ -41,6 +55,7 @@ export const products: Product[] = [
     price: 8.99,
     shortDesc: "Short description for Product 5",
     imageUrl: "/images/product5.jpg",
+    quantity: 1,
   },
   {
     id: "6",
@@ -48,6 +63,7 @@ export const products: Product[] = [
     price: 24.99,
     shortDesc: "Short description for Product 6",
     imageUrl: "/images/product6.jpg",
+    quantity: 1,
   },
   {
     id: "7",
@@ -55,6 +71,7 @@ export const products: Product[] = [
     price: 17.99,
     shortDesc: "Short description for Product 7",
     imageUrl: "/images/product7.jpg",
+    quantity: 1,
   },
   {
     id: "8",
@@ -62,6 +79,7 @@ export const products: Product[] = [
     price: 11.49,
     shortDesc: "Short description for Product 8",
     imageUrl: "/images/product8.jpg",
+    quantity: 1,
   },
   {
     id: "9",
@@ -69,6 +87,7 @@ export const products: Product[] = [
     price: 14.99,
     shortDesc: "Short description for Product 9",
     imageUrl: "/images/product9.jpg",
+    quantity: 1,
   },
   {
     id: "10",
@@ -76,5 +95,6 @@ export const products: Product[] = [
     price: 9.99,
     shortDesc: "Short description for Product 10",
     imageUrl: "/images/product10.jpg",
+    quantity: 1,
   },
 ];

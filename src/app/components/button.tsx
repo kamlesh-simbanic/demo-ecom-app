@@ -3,9 +3,9 @@ import { Button as BsButton } from "react-bootstrap";
 const Button = ({
   variant = "primary",
   label,
-  onClick,
+  onClick = () => ({}),
 }: {
-  onClick: () => void;
+  onClick?: () => void;
   label: string;
   variant?: string;
 }) => {

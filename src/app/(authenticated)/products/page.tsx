@@ -1,8 +1,12 @@
+"use client";
 import ProductCard from "@/app/components/productCard";
-import { Product, products } from "@/app/assets/products";
+import { Product } from "@/app/assets/products";
 import { Col, Row } from "react-bootstrap";
+import { getProducts } from "@/app/services/products";
 
 export default function Products() {
+  const products = getProducts();
+
   return (
     <Row>
       {products.map((product: Product) => (

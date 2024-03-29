@@ -93,6 +93,14 @@ export const ShoppingCartProvider = ({ children }: any) => {
       localStorage.getItem("cartItems") ?? "[]"
     ) as CartItem[];
     setCart(items);
+
+    const currentProducts = JSON.parse(
+      localStorage.getItem("products") ?? "[]"
+    ) as Product[];
+
+    if (currentProducts.length == 0) {
+      localStorage.setItem("products", JSON.stringify(products));
+    }
   }, []);
 
   return (
