@@ -1,3 +1,4 @@
+"use client";
 import { Product } from "@/app/assets/products";
 import { Col, Container, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";

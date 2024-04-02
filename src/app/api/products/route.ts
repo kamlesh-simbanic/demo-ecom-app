@@ -1,19 +1,23 @@
 import { Product, products } from "@/app/assets/products";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic"; // defaults to auto
 
-export default async function GET(
-  request: NextApiRequest,
-  res: NextApiResponse
-) {
-  const { id } = request.query; // Assuming you want to access an 'id' parameter
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
 
-  // Use the 'id' parameter in your logic
-  console.log("ID:", id);
+  if (id) {
+    if (!id || typeof id !== "string") {
+      return NextResponse.json({
+        message: "Invalid request, ID parameter missing or invalid",
+      });
+    }
 
-  const product = products.find((p) => p.id === id) as Product;
+    const product = products.find((p) => p.id === id) as Product;
 
-  // Send a response
-  res.status(200).json({ product });
+    return NextResponse.json(product);
+  }
+
+  return NextResponse.json(products);
 }

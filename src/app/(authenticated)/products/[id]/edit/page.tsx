@@ -24,8 +24,8 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
     }));
   };
 
-  const loadProduct = (id: string) => {
-    const result = getProduct(params.id);
+  const loadProduct = async (id: string) => {
+    const result = await getProduct(id);
     setProduct(result);
   };
 

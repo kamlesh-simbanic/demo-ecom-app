@@ -1,4 +1,3 @@
-"use client";
 import Content from "./content";
 import { Col, Row } from "react-bootstrap";
 import Link from "next/link";
@@ -9,7 +8,10 @@ export default async function ProductDetails({
 }: {
   params: { id: string };
 }) {
-  let product = getProduct(params.id);
+  const { id } = params;
+  const product = await getProduct(id);
+
+  console.log("product", product);
 
   return (
     <>
