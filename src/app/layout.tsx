@@ -20,6 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const isAuthenticated = auth.isAuthenticated();
+  console.log("isAuthenticated", isAuthenticated);
+
   return (
     <html lang="en">
       <head>
@@ -55,12 +57,7 @@ export default function RootLayout({
       </head>
       <body>
         <ShoppingCartProvider>
-          <header>
-            <NavbarComponent isAuthenticated={isAuthenticated} />
-          </header>
-          <main className="p-5">
-            <Container className="mt-4">{children}</Container>
-          </main>
+          {children}
           <footer
             className="bg-dark text-white text-center py-4"
             style={{ height: "10px" }}

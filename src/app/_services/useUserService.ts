@@ -35,7 +35,7 @@ function useUserService(): IUserService {
         userStore.setState({ ...initialState, currentUser });
 
         // get return url from query parameters or default to '/'
-        const returnUrl = searchParams.get("returnUrl") || "/";
+        const returnUrl = searchParams.get("returnUrl") || "/app";
         router.push(returnUrl);
       } catch (error: any) {
         alertService.error(error);
@@ -43,7 +43,7 @@ function useUserService(): IUserService {
     },
     logout: async () => {
       await fetch.post("/api/account/logout");
-      router.push("/account/login");
+      router.push("/signin");
     },
     register: async (user) => {
       try {
@@ -102,7 +102,7 @@ function useUserService(): IUserService {
 
       // logout if the user deleted their own record
       if (response.deletedSelf) {
-        router.push("/account/login");
+        router.push("/signin");
       }
     },
   };

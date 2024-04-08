@@ -15,6 +15,7 @@ function NavbarComponent({ isAuthenticated }: any) {
   async function logout() {
     setLoggingOut(true);
     await userService.logout();
+    setLoggingOut(false);
   }
 
   const { totalItems } = useShoppingCart();
@@ -35,12 +36,17 @@ function NavbarComponent({ isAuthenticated }: any) {
             <Link href="/" className="nav-link">
               Home
             </Link>
-            <Link href="/products" className="nav-link">
-              Products
-            </Link>
+            {!isAuthenticated && (
+              <Link href="/products" className="nav-link">
+                Products
+              </Link>
+            )}
             {isAuthenticated && (
               <>
-                <Link href="/orders" className="nav-link">
+                <Link href="/app/products" className="nav-link">
+                  Products
+                </Link>
+                <Link href="/app/orders" className="nav-link">
                   Orders
                 </Link>
                 <Button
