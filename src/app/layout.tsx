@@ -5,6 +5,7 @@ import { Container } from "reactstrap";
 import NavbarComponent from "./components/layout/navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ShoppingCartProvider } from "./providers/cart";
+import { auth } from "@/app/_helpers/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isAuthenticated = auth.isAuthenticated();
   return (
     <html lang="en">
       <head>
@@ -54,7 +56,7 @@ export default function RootLayout({
       <body>
         <ShoppingCartProvider>
           <header>
-            <NavbarComponent />
+            <NavbarComponent isAuthenticated={isAuthenticated} />
           </header>
           <main className="p-5">
             <Container className="mt-4">{children}</Container>

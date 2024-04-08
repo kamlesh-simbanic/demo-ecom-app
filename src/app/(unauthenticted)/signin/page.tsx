@@ -2,8 +2,11 @@
 import { ChangeEventHandler, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { signIn } from "next-auth/react";
+import { useUserService } from "@/app/_services";
 
 export default function SignIn() {
+  const userService = useUserService();
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -18,23 +21,7 @@ export default function SignIn() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await signIn("credentials", {
-      redirect: false,
-      email: data.email,
-      password: data.password,
-    });
-
-    console.log("response", response);
-
-    if (response?.error) {
-      // setLoading(false);
-      // setError(response?.error);
-    }
-    if (response?.error === null) {
-      // setLoading(false);
-      // toast.success("You successfully logged in");
-      // router.push("/cart");
-    }
+    await userService.login(data.email, data.password);
   };
 
   return (
