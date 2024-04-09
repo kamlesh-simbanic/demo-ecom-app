@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/app/_helpers/server";
 import { Alert } from "@/app/_components";
 import { Container } from "react-bootstrap";
-import NavbarComponent from "../../components/layout/navbar";
+import NavbarComponent from "@/app/_components/layout/navbar";
 
 export default Layout;
 
@@ -13,7 +13,9 @@ function Layout({ children }: { children: React.ReactNode }) {
   const isAuthenticated = auth.isAuthenticated();
 
   if (!isAuthenticated) {
-    const returnUrl = encodeURIComponent(headers().get("x-invoke-path") || "/");
+    const returnUrl = encodeURIComponent(
+      headers().get("x-invoke-path") || "/home"
+    );
     redirect(`/signin?returnUrl=${returnUrl}`);
   }
 
@@ -24,7 +26,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       </header>
       <Alert />
       <main className="p-5">
-        <Container className="mt-4">{children}</Container>
+        <Container className="mt-5">{children}</Container>
       </main>
     </div>
   );

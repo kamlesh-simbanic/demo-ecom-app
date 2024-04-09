@@ -1,4 +1,4 @@
-import Table from "@/app/components/table";
+import Table from "@/app/_components/table";
 import { orders, orderColumns, Order } from "@/app/assets/orders";
 
 export default function Orders() {

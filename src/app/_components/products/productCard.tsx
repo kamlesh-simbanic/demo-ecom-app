@@ -2,13 +2,16 @@
 
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import { Product } from "../assets/products";
+import { Product } from "../../assets/products";
 import Link from "next/link";
-import { useShoppingCart } from "../providers/cart";
+import { useShoppingCart } from "../../providers/cart";
+import { auth } from "../../_helpers/server";
 
-const ProductCard = (props: Product) => {
-  const { id, name, shortDesc, price } = props;
+const ProductCard = (props: { product: Product; isAuthenticated: boolean }) => {
+  const { id, name, shortDesc, price } = props.product;
+
   const { addItem } = useShoppingCart();
+
   return (
     <>
       <Card style={{ width: "18rem" }}>
@@ -19,9 +22,11 @@ const ProductCard = (props: Product) => {
           </Link>
           <Card.Text>{shortDesc}</Card.Text>
           <Card.Text>{price}</Card.Text>
-          <Button variant="primary" onClick={() => addItem(id)}>
-            Add Cart
-          </Button>
+          {props.isAuthenticated && (
+            <Button variant="primary" onClick={() => addItem(id)}>
+              Add Cart
+            </Button>
+          )}
         </Card.Body>
       </Card>
     </>

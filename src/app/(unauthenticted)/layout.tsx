@@ -2,7 +2,8 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/app/_helpers/server";
 import { Alert } from "@/app/_components";
-import NavbarComponent from "../components/layout/navbar";
+import NavbarComponent from "@/app/_components/layout/navbar";
+import { Container } from "react-bootstrap";
 
 export default Layout;
 
@@ -18,7 +19,9 @@ function Layout({ children }: { children: React.ReactNode }) {
     <>
       <NavbarComponent isAuthenticated={isAuthenticated} />
       <Alert />
-      <div className="col-md-6 offset-md-3 mt-5">{children}</div>
+      <main className="p-5">
+        <Container className="mt-5">{children}</Container>
+      </main>
     </>
   );
 }

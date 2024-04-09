@@ -9,7 +9,7 @@ type ColumnType<T> = {
   key: keyof T;
   label: string;
   sortable?: boolean;
-  render?: (value: T[keyof T]) => React.ReactNode;
+  render?: (value: T) => React.ReactNode;
 };
 
 export const orderColumns: ColumnType<Order>[] = [

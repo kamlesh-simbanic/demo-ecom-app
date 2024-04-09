@@ -25,7 +25,9 @@ function NavbarComponent({ isAuthenticated }: any) {
   return (
     <Navbar bg="light" expand="lg" fixed="top">
       <Container fluid>
-        <Navbar.Brand href="/">OG SHOP</Navbar.Brand>
+        <Navbar.Brand href={isAuthenticated ? "/app" : "/home"}>
+          OG SHOP
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -33,7 +35,10 @@ function NavbarComponent({ isAuthenticated }: any) {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Link href="/" className="nav-link">
+            <Link
+              href={isAuthenticated ? "/app" : "/home"}
+              className="nav-link"
+            >
               Home
             </Link>
             {!isAuthenticated && (
@@ -96,7 +101,7 @@ function NavbarComponent({ isAuthenticated }: any) {
                 >
                   <i className="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <Link href="/cart">
+                <Link href="/app/cart">
                   <span
                     style={{
                       cursor: "pointer",
