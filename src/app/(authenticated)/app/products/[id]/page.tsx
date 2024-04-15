@@ -1,7 +1,7 @@
 import Content from "./content";
 import { Col, Row } from "react-bootstrap";
 import Link from "next/link";
-import { getProduct } from "@/app/services/products";
+import { getProduct } from "../action";
 
 export default async function ProductDetails({
   params,
@@ -10,8 +10,6 @@ export default async function ProductDetails({
 }) {
   const { id } = params;
   const product = await getProduct(id);
-
-  console.log("product", product);
 
   return (
     <>

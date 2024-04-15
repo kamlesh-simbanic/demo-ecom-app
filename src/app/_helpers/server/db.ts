@@ -9,6 +9,7 @@ mongoose.Promise = global.Promise;
 
 export const db = {
   User: userModel(),
+  Product: ProductModel(),
 };
 
 // mongoose models with schema definitions
@@ -37,4 +38,29 @@ function userModel() {
   });
 
   return mongoose.models.User || mongoose.model("User", schema);
+}
+
+function ProductModel() {
+  const schema = new Schema(
+    {
+      name: { type: String, required: true },
+      price: { type: Number, required: true },
+      shortDesc: { type: String, required: true },
+      imageUrl: { type: String },
+      quantity: { type: Number, required: true },
+    },
+    {
+      timestamps: true,
+    }
+  );
+
+  schema.set("toJSON", {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc, ret) {
+      delete ret._id;
+    },
+  });
+
+  return mongoose.models.Product || mongoose.model("Product", schema);
 }

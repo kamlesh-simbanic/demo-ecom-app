@@ -8,13 +8,22 @@ const ProductList = ({ products }: { products: Product[] }) => {
 
   return (
     <Row>
-      {products.map((product: Product) => (
-        <>
-          <Col md={3} lg={3} sm={6} className="mb-2">
-            <ProductCard product={product} isAuthenticated={isAuthenticated} />
-          </Col>
-        </>
-      ))}
+      {products.length > 0 ? (
+        products.map((product: Product) => (
+          <>
+            <Col md={3} lg={3} sm={6} className="mb-2">
+              <ProductCard
+                product={product}
+                isAuthenticated={isAuthenticated}
+              />
+            </Col>
+          </>
+        ))
+      ) : (
+        <Col className="p-1">
+          <h2 className="text-danger">No Products</h2>
+        </Col>
+      )}
     </Row>
   );
 };

@@ -1,44 +1,20 @@
-import { Product, products } from "@/app/assets/products";
-import { NextResponse } from "next/server";
+import joi from "joi";
 
-export const dynamic = "force-dynamic"; // defaults to auto
+import { productRepo } from "@/app/_helpers/server";
+import { apiHandler } from "@/app/_helpers/server/api";
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
+module.exports = apiHandler({
+  GET: getAll,
+  POST: create,
+});
 
-  if (id) {
-    if (!id || typeof id !== "string") {
-      return NextResponse.json({
-        message: "Invalid request, ID parameter missing or invalid",
-      });
-    }
-
-    const product = products.find((p) => p.id === id) as Product;
-
-    return NextResponse.json(product);
-  }
-
-  return NextResponse.json(products);
+async function getAll() {
+  return await productRepo.getAll();
 }
 
-export async function POST(request: Request) {
-  const { id, ..._body }: Product = await request.json();
-  console.log("_body", _body);
+async function create(req: Request) {
+  const body = await req.json();
+  console.log("body", body);
 
-  if (id) {
-    if (!id || typeof id !== "string") {
-      return NextResponse.json({
-        message: "Invalid request, ID parameter missing or invalid",
-      });
-    }
-
-    let result = products.map((p) => (p.id === id ? _body : p));
-
-    return NextResponse.json(_body);
-  }
-
-  products.push({ ..._body, id: `${Date.now()}` });
-
-  return NextResponse.json(_body);
+  await productRepo.create(body);
 }

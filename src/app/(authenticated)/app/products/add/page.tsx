@@ -1,16 +1,16 @@
 "use client";
 
 import { Product, initialProduct } from "@/app/assets/products";
-import Content from "../content";
+import Content from "../[id]/content";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { getProduct, removeProduct, updateProduct } from "../../action";
+import { addProduct } from "../action";
 import { useRouter } from "next/navigation";
 import Button from "@/app/_components/button";
+import { revalidatePath } from "next/cache";
 
-export default function ProductEdit({ params }: { params: { id: string } }) {
+export default function ProductAdd() {
   const router = useRouter();
-  const { id } = params;
   const [product, setProduct] = useState<Product>(initialProduct);
 
   const onChangeHandle = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -20,24 +20,12 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
     }));
   };
 
-  const loadProduct = async (id: string) => {
-    const result = await getProduct(id);
-    setProduct(result);
+  const saveProduct = async () => {
+    const result = await addProduct(product);
+    console.log(result);
+    revalidatePath(`/app/products`);
+    router.push(`/app/products`);
   };
-
-  const saveProduct = () => {
-    updateProduct(id, { ...product, id });
-    router.push(`/app/products/${id}`);
-  };
-
-  const deleteProduct = async () => {
-    await removeProduct(id);
-    router.push("/app/products");
-  };
-
-  useEffect(() => {
-    loadProduct(id);
-  }, [id]);
 
   return (
     <>
@@ -49,9 +37,6 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
       <Row>
         <Col xs={12} md={3}>
           <Button label="Save" onClick={saveProduct} />
-        </Col>
-        <Col xs={12} md={3}>
-          <Button label="Delete" variant="danger" onClick={deleteProduct} />
         </Col>
       </Row>
     </>

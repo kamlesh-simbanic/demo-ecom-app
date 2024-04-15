@@ -1,11 +1,16 @@
-import { Product } from "@/app/assets/products";
-import { Col, Row } from "react-bootstrap";
-import { getProducts } from "@/app/services/products";
+import { getProducts } from "./action";
 import ProductList from "@/app/_components/products/product-list";
-import { auth } from "@/app/_helpers/server";
+import Link from "next/link";
 
 export default async function Products() {
   const products = await getProducts();
-  const isAuthenticated = auth.isAuthenticated();
-  return <ProductList products={products} />;
+
+  return (
+    <>
+      <Link href="/app/products/add" className="nav-link text-info p-2">
+        Add Product
+      </Link>
+      <ProductList products={products} />
+    </>
+  );
 }

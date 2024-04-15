@@ -7,6 +7,8 @@ export type Product = {
   quantity: number;
 };
 
+export type ProductPayload = Omit<Product, "id">;
+
 export const initialProduct = {
   id: "",
   name: "",

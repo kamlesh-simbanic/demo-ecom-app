@@ -1,5 +1,6 @@
 "use client";
-import Button from "@/app/components/button";
+
+import Button from "@/app/_components/button";
 import { useShoppingCart } from "../providers/cart";
 
 export type CartItem = {
@@ -14,7 +15,7 @@ type ColumnType<T> = {
   key: string;
   label: string;
   sortable?: boolean;
-  render?: (value: T) => JSX.Element;
+  Render?: (value: T) => JSX.Element;
 };
 
 export const cartColumns: ColumnType<CartItem>[] = [
@@ -25,7 +26,7 @@ export const cartColumns: ColumnType<CartItem>[] = [
   {
     key: "actions",
     label: "Actions",
-    render: (item) => {
+    Render: (item) => {
       const { removeItem } = useShoppingCart();
 
       return (

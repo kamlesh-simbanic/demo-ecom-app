@@ -15,6 +15,7 @@ function Alert() {
   useEffect(() => {
     // clear alert on location change
     alertService.clear();
+    // react-hooks/exhaustive-deps
   }, [pathname]);
 
   if (!alert) return null;

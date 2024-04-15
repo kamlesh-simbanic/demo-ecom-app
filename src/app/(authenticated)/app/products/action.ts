@@ -1,7 +1,9 @@
-import { Product } from "../assets/products";
+import { Product } from "@/app/assets/products";
 
 export const getProduct = async (id: string): Promise<Product> => {
-  const res = await fetch(`http://localhost:4001/api/products?id=${id}`);
+  const res = await fetch(`http://localhost:4001/api/products/${id}`, {
+    cache: "no-cache",
+  });
   const product = await res.json();
 
   return product as Product;
@@ -27,7 +29,7 @@ export const addProduct = async (data: Product) => {
 
 export const updateProduct = async (id: string, data: Product) => {
   const res = await fetch(`http://localhost:4001/api/products/${id}`, {
-    method: "POST",
+    method: "PUT",
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +40,10 @@ export const updateProduct = async (id: string, data: Product) => {
 };
 
 export const removeProduct = async (id: string) => {
-  let products = await getProducts();
-  products = products.filter((item) => item.id !== id);
-  localStorage.setItem("products", JSON.stringify(products));
+  await fetch(`http://localhost:4001/api/products/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };

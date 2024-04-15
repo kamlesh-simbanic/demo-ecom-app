@@ -1,6 +1,6 @@
 "use client";
 import { CartItem, cartColumns, cartItems } from "@/app/assets/cart";
-import TableComponent from "@/app/components/table";
+import TableComponent from "@/app/_components/table";
 import { useShoppingCart } from "@/app/providers/cart";
 
 export default function Cart() {
