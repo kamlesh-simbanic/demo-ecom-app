@@ -51,13 +51,11 @@ export const addProduct = async (data: Product) => {
 };
 
 export const updateProduct = async (id: string, data: Product) => {
-  const res = await fetch(`http://localhost:4001/api/products/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const res = await axios(
+    `http://localhost:4001/api/products/${id}`,
+    "PUT",
+    data
+  );
   const result = await res.json();
   revalidatePath(`/app/products/${id}`);
 
@@ -65,11 +63,6 @@ export const updateProduct = async (id: string, data: Product) => {
 };
 
 export const removeProduct = async (id: string) => {
-  await fetch(`http://localhost:4001/api/products/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  await axios(`http://localhost:4001/api/products/${id}`, "DELETE");
   revalidatePath(`/app/products`);
 };
