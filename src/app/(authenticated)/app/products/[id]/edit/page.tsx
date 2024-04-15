@@ -29,9 +29,9 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
     setProduct(result);
   };
 
-  const saveProduct = () => {
-    updateProduct(id, { ...product, id });
-    router.replace(`/app/products/${id}`);
+  const saveProduct = async () => {
+    await updateProduct(id, { ...product, id });
+    router.push(`/app/products/${id}`);
   };
 
   const deleteProduct = async () => {

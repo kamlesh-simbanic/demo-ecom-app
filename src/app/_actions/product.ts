@@ -1,4 +1,7 @@
+"use server";
+
 import { Product } from "@/app/assets/products";
+import { revalidatePath } from "next/cache";
 
 export const getProduct = async (id: string): Promise<Product> => {
   const res = await fetch(`http://localhost:4001/api/products/${id}`, {
@@ -14,6 +17,7 @@ export async function getProducts(): Promise<Product[]> {
     cache: "no-cache",
   });
   const products = await res.json();
+  revalidatePath(`/app/products`);
   return products as Product[];
 }
 export const addProduct = async (data: Product) => {
@@ -25,6 +29,7 @@ export const addProduct = async (data: Product) => {
     },
   });
   const result = await res.json();
+  revalidatePath(`/app/products`);
   return result as Product;
 };
 
@@ -37,6 +42,8 @@ export const updateProduct = async (id: string, data: Product) => {
     },
   });
   const result = await res.json();
+  revalidatePath(`/app/products/${id}`);
+
   return result as Product;
 };
 
@@ -47,4 +54,5 @@ export const removeProduct = async (id: string) => {
       "Content-Type": "application/json",
     },
   });
+  revalidatePath(`/app/products`);
 };
