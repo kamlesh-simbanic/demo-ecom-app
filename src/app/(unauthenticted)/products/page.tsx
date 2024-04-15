@@ -1,4 +1,4 @@
-import { getProducts } from "@/app/services/products";
+import { getProducts } from "@/app/_actions/product";
 import ProductList from "@/app/_components/products/product-list";
 
 export default async function Products() {

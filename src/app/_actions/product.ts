@@ -25,6 +25,7 @@ export const addProduct = async (data: Product) => {
     },
   });
   const result = await res.json();
+  return result as Product;
 };
 
 export const updateProduct = async (id: string, data: Product) => {

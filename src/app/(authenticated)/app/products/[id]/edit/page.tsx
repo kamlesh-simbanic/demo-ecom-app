@@ -4,7 +4,11 @@ import { Product, initialProduct } from "@/app/assets/products";
 import Content from "../content";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { getProduct, removeProduct, updateProduct } from "../../action";
+import {
+  getProduct,
+  removeProduct,
+  updateProduct,
+} from "@/app/_actions/product";
 import { useRouter } from "next/navigation";
 import Button from "@/app/_components/button";
 
@@ -27,12 +31,12 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
 
   const saveProduct = () => {
     updateProduct(id, { ...product, id });
-    router.push(`/app/products/${id}`);
+    router.replace(`/app/products/${id}`);
   };
 
   const deleteProduct = async () => {
     await removeProduct(id);
-    router.push("/app/products");
+    router.replace("/app/products");
   };
 
   useEffect(() => {
