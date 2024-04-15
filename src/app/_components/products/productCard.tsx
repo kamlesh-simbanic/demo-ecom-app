@@ -7,8 +7,14 @@ import Link from "next/link";
 import { useShoppingCart } from "../../providers/cart";
 import { auth } from "../../_helpers/server";
 
-const ProductCard = (props: { product: Product; isAuthenticated: boolean }) => {
-  const { id, name, shortDesc, price } = props.product;
+const ProductCard = ({
+  isAuthenticated,
+  product,
+}: {
+  product: Product;
+  isAuthenticated: boolean;
+}) => {
+  const { id, name, shortDesc, price } = product;
 
   const { addItem } = useShoppingCart();
 
@@ -17,12 +23,14 @@ const ProductCard = (props: { product: Product; isAuthenticated: boolean }) => {
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src={"/images/image1.jpg"} />
         <Card.Body>
-          <Link href={`/products/${id}`}>
+          <Link
+            href={isAuthenticated ? `/app/products/${id}` : `/products/${id}`}
+          >
             <Card.Title>{name}</Card.Title>
           </Link>
           <Card.Text>{shortDesc}</Card.Text>
           <Card.Text>{price}</Card.Text>
-          {props.isAuthenticated && (
+          {isAuthenticated && (
             <Button variant="primary" onClick={() => addItem(id)}>
               Add Cart
             </Button>

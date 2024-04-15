@@ -10,7 +10,7 @@ import {
   updateProduct,
 } from "@/app/services/products";
 import { useRouter } from "next/navigation";
-import Button from "@/app/components/button";
+import Button from "@/app/_components/button";
 
 export default function ProductEdit({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -30,8 +30,8 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
   };
 
   const saveProduct = () => {
-    updateProduct(id, product);
-    router.push(`/products/${id}`);
+    updateProduct(id, { ...product, id });
+    router.push(`/app/products/${id}`);
   };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
             variant="danger"
             onClick={() => {
               removeProduct(id);
-              router.replace("/products");
+              router.replace("/app/products");
             }}
           />
         </Col>
