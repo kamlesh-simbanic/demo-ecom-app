@@ -8,8 +8,24 @@ export { useProductService };
 
 // user state store
 const initialState = {
-  products: undefined,
-  product: undefined,
+  products: [
+    {
+      id: "",
+      name: "",
+      price: 0,
+      shortDesc: "",
+      imageUrl: "",
+      quantity: 0,
+    },
+  ],
+  product: {
+    id: "",
+    name: "",
+    price: 0,
+    shortDesc: "",
+    imageUrl: "",
+    quantity: 0,
+  },
 };
 const userStore = create<IProductStore>(() => initialState);
 
@@ -21,6 +37,8 @@ function useProductService(): IProductService {
   const { product, products } = userStore();
 
   return {
+    product,
+    products,
     getAll: async () => {
       userStore.setState({ products: await fetch.get("/api/products") });
     },
@@ -55,7 +73,7 @@ function useProductService(): IProductService {
 
 // interfaces
 
-interface IProduct {
+export interface IProduct {
   id: string;
   name: string;
   price: number;
@@ -65,13 +83,13 @@ interface IProduct {
 }
 
 interface IProductStore {
-  products?: IProduct[];
-  product?: IProduct;
+  products: IProduct[];
+  product: IProduct;
 }
 
 interface IProductService extends IProductStore {
-  products?: IProduct[];
-  product?: IProduct;
+  products: IProduct[];
+  product: IProduct;
   getAll: () => Promise<void>;
   getById: (id: string) => Promise<void>;
   create: (user: IProduct) => Promise<void>;
