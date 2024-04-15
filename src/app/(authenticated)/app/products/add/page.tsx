@@ -4,7 +4,6 @@ import { addProduct } from "@/app/_actions/product";
 import { ChangeEvent, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Product, initialProduct } from "@/app/assets/products";
-import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 import Button from "@/app/_components/button";
 import Content from "@/app/_components/products/Details";
@@ -23,7 +22,6 @@ export default function ProductAdd() {
   const saveProduct = async () => {
     const result = await addProduct(product);
     console.log(result);
-    revalidatePath(`/app/products`);
     router.push(`/app/products`);
   };
 
