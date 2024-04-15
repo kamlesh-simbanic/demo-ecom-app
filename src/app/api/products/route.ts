@@ -8,7 +8,9 @@ module.exports = apiHandler({
   POST: create,
 });
 
-async function getAll() {
+async function getAll(req: Request) {
+  console.log(req.headers);
+
   return await productRepo.getAll();
 }
 

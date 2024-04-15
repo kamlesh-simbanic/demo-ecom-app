@@ -21,7 +21,7 @@ function apiHandler(handler: any) {
 
       try {
         // global middleware
-        // await jwtMiddleware(req);
+        await jwtMiddleware(req);
         await validateMiddleware(req, handler[method].schema);
 
         // route handler
