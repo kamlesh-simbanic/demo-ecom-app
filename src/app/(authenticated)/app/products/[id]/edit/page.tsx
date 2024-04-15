@@ -1,7 +1,5 @@
 "use client";
 
-import { Product, initialProduct } from "@/app/assets/products";
-import Content from "../content";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import {
@@ -9,8 +7,10 @@ import {
   removeProduct,
   updateProduct,
 } from "@/app/_actions/product";
+import { Product, initialProduct } from "@/app/assets/products";
 import { useRouter } from "next/navigation";
 import Button from "@/app/_components/button";
+import Content from "@/app/_components/products/Details";
 
 export default function ProductEdit({ params }: { params: { id: string } }) {
   const router = useRouter();

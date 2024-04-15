@@ -1,5 +1,5 @@
-import Content from "@/app/(authenticated)/app/products/[id]/content";
 import { getProduct } from "@/app/_actions/product";
+import Content from "@/app/_components/products/Details";
 
 export default async function ProductDetails({
   params,

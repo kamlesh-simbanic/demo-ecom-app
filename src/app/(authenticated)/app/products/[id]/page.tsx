@@ -1,7 +1,7 @@
-import Content from "./content";
 import { Col, Row } from "react-bootstrap";
-import Link from "next/link";
 import { getProduct } from "@/app/_actions/product";
+import Content from "@/app/_components/products/Details";
+import Link from "next/link";
 
 export default async function ProductDetails({
   params,
