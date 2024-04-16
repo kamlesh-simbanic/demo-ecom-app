@@ -48,6 +48,8 @@ const axios = {
 export const getProduct = async (id: string): Promise<Product> => {
   const res = await axios.get(`http://localhost:4001/api/products/${id}`);
   const product = await res.json();
+  console.log("products", product);
+
   return product as Product;
 };
 

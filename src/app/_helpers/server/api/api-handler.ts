@@ -22,14 +22,7 @@ function apiHandler(handler: any) {
       try {
         // global middleware
 
-        const isPublic = [
-          req.url.includes("/products") && method == "GET",
-          req.url.includes("/users") && method !== "GET",
-        ].some((x) => x === true);
-
-        if (isPublic === false) {
-          await jwtMiddleware(req);
-        }
+        await jwtMiddleware(req);
         await validateMiddleware(req, handler[method].schema);
 
         const responseBody = await handler[method](req, ...args);

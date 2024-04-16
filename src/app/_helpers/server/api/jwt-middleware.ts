@@ -18,6 +18,18 @@ function isPublicPath(req: NextRequest) {
     "POST:/api/account/login",
     "POST:/api/account/logout",
     "POST:/api/account/register",
+    "GET:/api/products",
+    /^GET:\/api\/products\/[0-9a-f]{24}$/,
   ];
-  return publicPaths.includes(`${req.method}:${req.nextUrl.pathname}`);
+  const path = `${req.method}:${req.nextUrl.pathname}`;
+
+  // return publicPaths.includes(`${req.method}:${req.nextUrl.pathname}`);
+  return publicPaths.some((p) => {
+    if (typeof p === "string") {
+      return p === path;
+    } else if (p instanceof RegExp) {
+      return p.test(path);
+    }
+    return false;
+  });
 }
