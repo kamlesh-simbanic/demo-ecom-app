@@ -21,10 +21,17 @@ function apiHandler(handler: any) {
 
       try {
         // global middleware
-        await jwtMiddleware(req);
+
+        const isPublic = [
+          req.url.includes("/products") && method == "GET",
+          req.url.includes("/users") && method !== "GET",
+        ].some((x) => x === true);
+
+        if (isPublic === false) {
+          await jwtMiddleware(req);
+        }
         await validateMiddleware(req, handler[method].schema);
 
-        // route handler
         const responseBody = await handler[method](req, ...args);
         return NextResponse.json(responseBody || {});
       } catch (err: any) {

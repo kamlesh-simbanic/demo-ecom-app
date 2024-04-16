@@ -8,7 +8,7 @@ const headers = new Headers();
 
 headers.set("Content-Type", "application/json");
 
-const axios = async (url: string, method = "GET", data?: any) => {
+const httpClient = async (url: string, method = "GET", data?: any) => {
   const cookiesData = cookies().getAll();
 
   const cookieValue = cookiesData.map((x) => `${x.name}=${x.value}`).join(";");
@@ -30,39 +30,50 @@ const axios = async (url: string, method = "GET", data?: any) => {
   });
 };
 
-export const getProduct = async (id: string): Promise<Product> => {
-  const res = await axios(`http://localhost:4001/api/products/${id}`);
-  const product = await res.json();
+const axios = {
+  get: (url: string) => {
+    return httpClient(url);
+  },
+  post: (url: string, data: any) => {
+    return httpClient(url, "POST", data);
+  },
+  put: (url: string, data: any) => {
+    return httpClient(url, "PUT", data);
+  },
+  delete: (url: string) => {
+    return httpClient(url, "DELETE");
+  },
+};
 
+export const getProduct = async (id: string): Promise<Product> => {
+  const res = await axios.get(`http://localhost:4001/api/products/${id}`);
+  const product = await res.json();
   return product as Product;
 };
 
 export async function getProducts(): Promise<Product[]> {
-  const res = await axios(`http://localhost:4001/api/products`);
+  const res = await axios.get(`http://localhost:4001/api/products`);
   const products = await res.json();
+  console.log("products", products);
+
   revalidatePath(`/app/products`);
   return products as Product[];
 }
 export const addProduct = async (data: Product) => {
-  const res = await axios(`http://localhost:4001/api/products`, "POST", data);
+  const res = await axios.post(`http://localhost:4001/api/products`, data);
   const result = await res.json();
   revalidatePath(`/app/products`);
   return result as Product;
 };
 
 export const updateProduct = async (id: string, data: Product) => {
-  const res = await axios(
-    `http://localhost:4001/api/products/${id}`,
-    "PUT",
-    data
-  );
+  const res = await axios.put(`http://localhost:4001/api/products/${id}`, data);
   const result = await res.json();
   revalidatePath(`/app/products/${id}`);
-
   return result as Product;
 };
 
 export const removeProduct = async (id: string) => {
-  await axios(`http://localhost:4001/api/products/${id}`, "DELETE");
+  await axios.delete(`http://localhost:4001/api/products/${id}`);
   revalidatePath(`/app/products`);
 };
