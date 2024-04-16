@@ -5,7 +5,13 @@ import { Card, Button } from "react-bootstrap";
 import { Product } from "../../assets/products";
 import Link from "next/link";
 import { useShoppingCart } from "../../providers/cart";
-import { auth } from "../../_helpers/server";
+
+export const currencyFormatter = (value: number) => {
+  return value.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+};
 
 const ProductCard = ({
   isAuthenticated,
@@ -29,7 +35,7 @@ const ProductCard = ({
             <Card.Title>{name}</Card.Title>
           </Link>
           <Card.Text>{shortDesc}</Card.Text>
-          <Card.Text>{price}</Card.Text>
+          <Card.Text>{currencyFormatter(price)}</Card.Text>
           {isAuthenticated && (
             <Button variant="primary" onClick={() => addItem(id)}>
               Add Cart
