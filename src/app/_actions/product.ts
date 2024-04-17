@@ -3,6 +3,7 @@
 import { Product } from "@/app/assets/products";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const headers = new Headers();
 
@@ -46,11 +47,18 @@ const axios = {
 };
 
 export const getProduct = async (id: string): Promise<Product> => {
-  const res = await axios.get(`http://localhost:4001/api/products/${id}`);
-  const product = await res.json();
-  console.log("products", product);
+  try {
+    const res = await axios.get(`http://localhost:4001/api/products/${id}`);
+    const product = await res.json();
+    console.log("products", product);
 
-  return product as Product;
+    return product as Product;
+  } catch (error) {
+    console.log("errro");
+
+    // redirect("/app/products");
+    return {} as Product;
+  }
 };
 
 export async function getProducts(): Promise<Product[]> {

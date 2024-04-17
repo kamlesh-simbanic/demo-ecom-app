@@ -25,7 +25,7 @@ async function getById(id: string) {
   try {
     return await Product.findById(id);
   } catch {
-    throw "Product Not Found";
+    // throw "Product Not Found";
   }
 }
 

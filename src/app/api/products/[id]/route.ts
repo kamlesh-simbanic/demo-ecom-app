@@ -1,5 +1,6 @@
 import joi from "joi";
 
+import { redirect } from "next/navigation";
 import { apiHandler } from "@/app/_helpers/server/api";
 import { productRepo } from "@/app/_helpers/server";
 
@@ -27,6 +28,12 @@ export async function GET(
   { params: { id } }: { params: { id: string } }
 ) {
   const product = await productRepo.getById(id);
+
+  console.log("prosddsdsdds", product);
+
+  if (!product) {
+    redirect("/api/products");
+  }
 
   return Response.json(product);
 }
