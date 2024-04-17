@@ -13,8 +13,6 @@ export default function SignIn() {
   });
 
   const onChangeHandle = ({ name, value }: { name: string; value: string }) => {
-    console.log({ name, value });
-
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 

@@ -29,8 +29,6 @@ export async function GET(
 ) {
   const product = await productRepo.getById(id);
 
-  console.log("prosddsdsdds", product);
-
   if (!product) {
     redirect("/api/products");
   }

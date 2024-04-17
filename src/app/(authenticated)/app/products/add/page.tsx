@@ -21,7 +21,6 @@ export default function ProductAdd() {
 
   const saveProduct = async () => {
     const result = await addProduct(product);
-    console.log(result);
     router.push(`/app/products`);
   };
 

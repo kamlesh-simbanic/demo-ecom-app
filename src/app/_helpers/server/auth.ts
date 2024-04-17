@@ -10,8 +10,6 @@ function isAuthenticated() {
   try {
     const token = verifyToken();
 
-    console.log("token", token);
-
     return token ? true : false;
   } catch {
     return false;

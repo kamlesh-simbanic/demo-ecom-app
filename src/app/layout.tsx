@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Container } from "reactstrap";
-import NavbarComponent from "@/app/_components/layout/navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ShoppingCartProvider } from "./providers/cart";
-import { auth } from "@/app/_helpers/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +17,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isAuthenticated = auth.isAuthenticated();
-  console.log("isAuthenticated", isAuthenticated);
-
   return (
     <html lang="en">
       <head>

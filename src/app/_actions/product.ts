@@ -50,12 +50,8 @@ export const getProduct = async (id: string): Promise<Product> => {
   try {
     const res = await axios.get(`http://localhost:4001/api/products/${id}`);
     const product = await res.json();
-    console.log("products", product);
-
     return product as Product;
   } catch (error) {
-    console.log("errro");
-
     // redirect("/app/products");
     return {} as Product;
   }
@@ -64,7 +60,6 @@ export const getProduct = async (id: string): Promise<Product> => {
 export async function getProducts(): Promise<Product[]> {
   const res = await axios.get(`http://localhost:4001/api/products`);
   const products = await res.json();
-  console.log("products", products);
 
   revalidatePath(`/app/products`);
   return products as Product[];
