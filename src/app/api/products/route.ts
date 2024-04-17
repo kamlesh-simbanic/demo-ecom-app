@@ -3,13 +3,19 @@ import joi from "joi";
 import { productRepo } from "@/app/_helpers/server";
 import { apiHandler } from "@/app/_helpers/server/api";
 import { headers } from "next/headers";
+import { NextRequest } from "next/server";
+
+import { db } from "@/app/_helpers/server/db";
+import { getQueryParams } from "@/app/_helpers/server/misc";
+
+const Product = db.Product;
 
 // module.exports = apiHandler({
 //   GET: getAll,
 //   POST: create,
 // });
 
-async function getAll(req: Request) {
+async function getAll(req: NextRequest) {
   return await productRepo.getAll();
 }
 
@@ -18,9 +24,17 @@ async function create(req: Request) {
   await productRepo.create(body);
 }
 
-export async function GET() {
-  const data = await productRepo.getAll();
-  return Response.json(data);
+export async function GET(req: NextRequest) {
+  const { search } = getQueryParams(req);
+
+  let query: any = {};
+
+  if (search) {
+    query["name"] = { $regex: search, $options: "i" };
+  }
+
+  const products = await Product.find(query);
+  return Response.json(products);
 }
 
 export async function POST(req: Request) {
