@@ -33,7 +33,9 @@ async function update(id: string, params: any) {
   const product = await Product.findById(id);
 
   // validate
-  if (!product) throw "User not found";
+  if (!product) throw "Product not found";
+
+  return await Product.findByIdAndUpdate(id, { $set: params }, { new: true });
 
   // copy params properties to user
   Object.assign(product, params);

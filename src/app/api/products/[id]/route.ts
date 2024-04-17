@@ -30,3 +30,12 @@ export async function GET(
 
   return Response.json(product);
 }
+
+export async function PATCH(
+  req: Request,
+  { params: { id } }: { params: { id: string } }
+) {
+  const body = await req.json();
+  const result = await productRepo.update(id, body);
+  return Response.json(result);
+}
