@@ -43,5 +43,5 @@ async function update(id: string, params: any) {
 }
 
 async function remove(id: string) {
-  await Product.findByIdAndDelete(id);
+  return await Product.findByIdAndDelete(id);
 }

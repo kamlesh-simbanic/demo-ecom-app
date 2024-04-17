@@ -39,3 +39,12 @@ export async function PATCH(
   const result = await productRepo.update(id, body);
   return Response.json(result);
 }
+
+export async function DELETE(
+  req: Request,
+  { params: { id } }: { params: { id: string } }
+) {
+  const result = await productRepo.remove(id);
+
+  return Response.json(result);
+}
