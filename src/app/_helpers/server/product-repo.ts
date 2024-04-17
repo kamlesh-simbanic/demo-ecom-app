@@ -13,7 +13,8 @@ export const productRepo = {
 
 async function create(params: any) {
   const product = new Product(params);
-  await product.save();
+  const result = await Product.insertMany([product]);
+  return result[0];
 }
 
 async function getAll() {
