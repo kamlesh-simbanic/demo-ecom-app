@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { usersRepo } from "@/app/_helpers/server";
 import { apiHandler } from "@/app/_helpers/server/api";
 import { cookies, headers } from "next/headers";
@@ -23,6 +24,11 @@ export async function GET(request: NextRequest) {
 
   console.log(theme);
   console.log(cookies().get("resultPerPage"));
+
+  // return new Response.json({ time: new Date.now() });
+  return new Response(JSON.stringify({ time: Date.now() }), {
+    headers: { "Content-Type": "application/json" },
+  });
 
   return new Response("<h1>Profle Api data</h1>", {
     headers: { "Content-Type": "text/html", "Set-Cookie": "theme=dark" },
