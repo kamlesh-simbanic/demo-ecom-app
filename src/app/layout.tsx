@@ -4,6 +4,7 @@ import "./globals.css";
 import { Container } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ShoppingCartProvider } from "./providers/cart";
+import { ThemeProvider } from "./_components/ThemProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,19 +51,21 @@ export default function RootLayout({
           rel="stylesheet"
         /> */}
       </head>
-      <body>
-        <ShoppingCartProvider>
-          {children}
-          <footer
-            className="bg-dark text-white text-center py-4"
-            style={{ height: "10px" }}
-          >
-            <Container>
-              <p>&copy; {new Date().getFullYear()} Your Company</p>
-            </Container>
-          </footer>
-        </ShoppingCartProvider>
-      </body>
+      <ThemeProvider>
+        <body>
+          <ShoppingCartProvider>
+            {children}
+            <footer
+              className="bg-dark text-white text-center py-4"
+              style={{ height: "10px" }}
+            >
+              <Container>
+                <p>&copy; {new Date().getFullYear()} Your Company</p>
+              </Container>
+            </footer>
+          </ShoppingCartProvider>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }
