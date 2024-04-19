@@ -5,12 +5,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function ClientRoutePage() {
-  console.log("client route rendrred");
+export default function ImageSlider() {
   const settings = {
     dots: true,
   };
-
   return (
     <div className="image-slider-container">
       <Slider {...settings}>
