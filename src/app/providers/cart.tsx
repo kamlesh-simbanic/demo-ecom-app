@@ -5,7 +5,7 @@ import { CartItem } from "../assets/cart";
 
 type ShoppingCartContextType = {
   cart: CartItem[];
-  addItem: (item: string) => void;
+  addItem: (item: Product) => void;
   removeItem: (id: string) => void;
   increment: (id: string) => void;
   decrement: (id: string) => void;
@@ -29,20 +29,18 @@ export const useShoppingCart = () => {
 export const ShoppingCartProvider = ({ children }: any) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const isItemExists = (id: string) => cart.find((x) => x.productId === +id);
+  const isItemExists = (id: string) => cart.find((x) => x.productId === id);
 
-  const addItem = (id: string) => {
-    if (isItemExists(id)) {
-      increment(id);
+  const addItem = (product: Product) => {
+    if (isItemExists(product.id)) {
+      increment(product.id);
       return;
     }
-
-    const product = products.find((x) => x.id === id) as Product;
 
     const updatedItems = [
       ...cart,
       {
-        productId: +id,
+        productId: product.id,
         name: product.name,
         quantity: 1,
         price: product.price,

@@ -56,7 +56,7 @@ const ProductCard = ({
           <Card.Text>{shortDesc}</Card.Text>
           <Card.Text>{currencyFormatter(price)}</Card.Text>
           {isAuthenticated && (
-            <Button variant="primary" onClick={() => addItem(id)}>
+            <Button variant="primary" onClick={() => addItem(product)}>
               Add Cart
             </Button>
           )}
