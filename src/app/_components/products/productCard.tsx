@@ -5,6 +5,9 @@ import { Card, Button } from "react-bootstrap";
 import { Product } from "../../assets/products";
 import Link from "next/link";
 import { useShoppingCart } from "../../providers/cart";
+import Image from "next/image";
+
+const imageSize = { width: 300, height: 300 };
 
 export const currencyFormatter = (value: number) => {
   return value.toLocaleString("en-US", {
@@ -26,9 +29,25 @@ const ProductCard = ({
 
   return (
     <>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={"/images/image1.jpg"} />
-        <Card.Body>
+      <Card
+        style={{ width: "18rem" }}
+        className="border border-danger overflow-hidden"
+      >
+        <div
+          style={{
+            position: "relative",
+            width: imageSize.width,
+            height: imageSize.height,
+          }}
+        >
+          <Image
+            src="/images/image1.jpg"
+            alt={name}
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
+        <Card.Body style={{ paddingRight: "1rem" }}>
           <Link
             href={isAuthenticated ? `/app/products/${id}` : `/products/${id}`}
           >
