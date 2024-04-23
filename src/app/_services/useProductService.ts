@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { useAlertService } from "@/app/_services";
 import { useFetch } from "@/app/_helpers/client";
@@ -33,7 +33,7 @@ function useProductService(): IProductService {
   const alertService = useAlertService();
   const fetch = useFetch();
   const router = useRouter();
-  const searchParams = useSearchParams();
+
   const { product, products } = userStore();
 
   return {

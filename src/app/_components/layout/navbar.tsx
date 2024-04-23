@@ -21,6 +21,7 @@ function NavbarComponent({ isAuthenticated }: any) {
   const { totalItems } = useShoppingCart();
 
   const [showSearch, setShowSearch] = useState(false);
+  const [search, setSearch] = useState("");
 
   return (
     <Navbar bg="light" expand="lg" fixed="top">
@@ -40,6 +41,9 @@ function NavbarComponent({ isAuthenticated }: any) {
               className="nav-link"
             >
               Home
+            </Link>
+            <Link href={"/dashboard"} className="nav-link">
+              Dashboard
             </Link>
             {!isAuthenticated && (
               <Link href="/products" className="nav-link">
@@ -90,6 +94,8 @@ function NavbarComponent({ isAuthenticated }: any) {
                   }`}
                   aria-label="Search"
                   onBlur={() => setShowSearch(!showSearch)}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
                 <span
                   style={{
