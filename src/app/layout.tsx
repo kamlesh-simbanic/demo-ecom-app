@@ -5,6 +5,7 @@ import { Container } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ShoppingCartProvider } from "./providers/cart";
 import { ThemeProvider } from "./_components/ThemProvider";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,7 +55,7 @@ export default function RootLayout({
       <ThemeProvider>
         <body>
           <ShoppingCartProvider>
-            {children}
+            <Suspense fallback={<h1>Loading...</h1>}>{children}</Suspense>
             <footer
               className="bg-dark text-white text-center py-4"
               style={{ height: "10px" }}
