@@ -1,19 +1,12 @@
-import { useUserService } from "@/app/_services";
+"use client";
+
 import { useShoppingCart } from "@/app/providers/cart";
 import Link from "next/link";
 import { useState } from "react";
-import { Navbar, Form, FormControl, Container, Nav } from "react-bootstrap";
+import { Form, FormControl } from "react-bootstrap";
+import { BsSearch } from "react-icons/bs";
 
 const NavSearch = () => {
-  const [loggingOut, setLoggingOut] = useState<boolean>(false);
-  const userService = useUserService();
-
-  async function logout() {
-    setLoggingOut(true);
-    await userService.logout();
-    setLoggingOut(false);
-  }
-
   const { totalItems } = useShoppingCart();
 
   const [showSearch, setShowSearch] = useState(false);
@@ -34,11 +27,12 @@ const NavSearch = () => {
           style={{
             cursor: "pointer",
             marginLeft: "10px",
+            marginRight: "10px",
             fontSize: "large",
           }}
           onClick={() => setShowSearch(!showSearch)}
         >
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <BsSearch />
         </span>
         <Link href="/app/cart">
           <span
