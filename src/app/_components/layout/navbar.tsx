@@ -42,9 +42,6 @@ function NavbarComponent({ isAuthenticated }: any) {
             >
               Home
             </Link>
-            <Link href={"/dashboard"} className="nav-link">
-              Dashboard
-            </Link>
             {!isAuthenticated && (
               <Link href="/products" className="nav-link">
                 Products
