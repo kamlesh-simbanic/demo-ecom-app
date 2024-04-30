@@ -16,8 +16,6 @@ export const config = {
   matcher: (request: NextRequest) => {
     const url = new URL(request.url);
 
-    console.log("url", url);
-
     // Check if the request is for an API path
     if (url.pathname.startsWith("/api")) {
       return true;
