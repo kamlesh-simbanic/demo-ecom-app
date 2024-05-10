@@ -52,10 +52,9 @@ export default async function ProductDetails({
 }
 
 const Product = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   return <Products />;
 };
+
 const Review = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 4000));
   return <div>Review</div>;
 };

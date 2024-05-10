@@ -1,7 +1,11 @@
 import { auth } from "@/app/_helpers/server";
 import { Product } from "@/app/assets/products";
-import ProductCard from "@/app/_components/products/productCard";
+import dynamic from "next/dynamic";
 import { Col, Row } from "react-bootstrap";
+
+const ProductCard = dynamic(
+  () => import("@/app/_components/products/productCard")
+);
 
 const ProductList = ({ products }: { products: Product[] }) => {
   const isAuthenticated = auth.isAuthenticated();

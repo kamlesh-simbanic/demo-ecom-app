@@ -5,6 +5,8 @@ import { auth } from "@/app/_helpers/server";
 import { Alert } from "@/app/_components";
 import { Container } from "react-bootstrap";
 import NavbarComponent from "@/app/_components/layout/navbar";
+import DeleteModal from "@/app/_components/DeleteModal";
+import Snackbar from "@/app/_components/SnackBar";
 
 export default Layout;
 
@@ -26,6 +28,8 @@ function Layout({ children }: { children: React.ReactNode }) {
       </header>
       <Alert />
       <main className="p-5">
+        <DeleteModal />
+        <Snackbar />
         <Container className="mt-5">{children}</Container>
       </main>
     </div>

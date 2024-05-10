@@ -38,8 +38,8 @@ async function update(id: string, params: any) {
   return await Product.findByIdAndUpdate(id, { $set: params }, { new: true });
 
   // copy params properties to user
-  Object.assign(product, params);
-  await product.save();
+  // Object.assign(product, params);
+  // await product.save();
 }
 
 async function remove(id: string) {

@@ -11,8 +11,10 @@ import { Product, initialProduct } from "@/app/assets/products";
 import { useRouter } from "next/navigation";
 import Button from "@/app/_components/button";
 import Content from "@/app/_components/products/Details";
+import useEvent from "@/app/utils/use-event";
 
 export default function ProductEdit({ params }: { params: { id: string } }) {
+  const { dispatch } = useEvent();
   const router = useRouter();
   const { id } = params;
   const [product, setProduct] = useState<Product>(initialProduct);
@@ -31,11 +33,13 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
 
   const saveProduct = async () => {
     await updateProduct(id, { ...product, id });
+    dispatch("SHOW_SNACK_BAR", "Product Saved Successfully");
     router.push(`/app/products/${id}`);
   };
 
   const deleteProduct = async () => {
     await removeProduct(id);
+    dispatch("SHOW_SNACK_BAR", "Product Removed Successfully");
     router.replace("/app/products");
   };
 
@@ -55,7 +59,16 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
           <Button label="Save" onClick={saveProduct} />
         </Col>
         <Col xs={12} md={3}>
-          <Button label="Delete" variant="danger" onClick={deleteProduct} />
+          <Button
+            label="Delete"
+            variant="danger"
+            onClick={() => {
+              dispatch("DELETE_MODAL_SHOW", {
+                content: product.name,
+                onConfirm: deleteProduct,
+              });
+            }}
+          />
         </Col>
       </Row>
     </>

@@ -3,6 +3,7 @@ import joi from "joi";
 import { redirect } from "next/navigation";
 import { apiHandler } from "@/app/_helpers/server/api";
 import { productRepo } from "@/app/_helpers/server";
+import { NextApiRequest } from "next";
 
 // module.exports = apiHandler({
 //   // GET: getById,
@@ -32,7 +33,7 @@ export async function GET(
   return Response.json(product);
 }
 
-export async function PATCH(
+export async function PUT(
   req: Request,
   { params: { id } }: { params: { id: string } }
 ) {
