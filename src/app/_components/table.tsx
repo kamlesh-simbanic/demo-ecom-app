@@ -6,7 +6,7 @@ type ColumnType<T> = {
   key: string;
   label: string;
   sortable?: boolean;
-  render?: (value: T) => React.ReactNode;
+  Render?: (value: T) => React.ReactNode;
 };
 
 type PropsType<T> = {
@@ -68,7 +68,7 @@ const TableComponent = <T extends Record<string, any>>({
           <tr key={rowIndex}>
             {columns.map((column) => (
               <td key={column.key.toString()}>
-                {column.render ? column.render(row) : row[column.key]}
+                {column.Render ? column.Render(row) : row[column.key]}
               </td>
             ))}
           </tr>

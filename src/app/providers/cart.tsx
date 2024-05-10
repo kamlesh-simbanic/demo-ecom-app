@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Product, products } from "../assets/products";
+import { Product } from "../assets/products";
 import { CartItem } from "../assets/cart";
 
 type ShoppingCartContextType = {
@@ -91,14 +91,6 @@ export const ShoppingCartProvider = ({ children }: any) => {
       localStorage.getItem("cartItems") ?? "[]"
     ) as CartItem[];
     setCart(items);
-
-    const currentProducts = JSON.parse(
-      localStorage.getItem("products") ?? "[]"
-    ) as Product[];
-
-    if (currentProducts.length == 0) {
-      localStorage.setItem("products", JSON.stringify(products));
-    }
   }, []);
 
   return (

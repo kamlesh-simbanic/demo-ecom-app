@@ -29,10 +29,6 @@ export async function GET(
 ) {
   const product = await productRepo.getById(id);
 
-  if (!product) {
-    redirect("/api/products");
-  }
-
   return Response.json(product);
 }
 

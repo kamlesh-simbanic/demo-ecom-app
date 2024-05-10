@@ -14,6 +14,10 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const product = await getProduct(params.id);
 
+  if (!product) {
+    throw new Error(`Product Not Found with ${params.id}`);
+  }
+
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
