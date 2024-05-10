@@ -1,7 +1,14 @@
 "use client";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  Suspense,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Product } from "../assets/products";
 import { CartItem } from "../assets/cart";
+import useEvent from "../utils/use-event";
 
 type ShoppingCartContextType = {
   cart: CartItem[];
@@ -27,6 +34,7 @@ export const useShoppingCart = () => {
 };
 
 export const ShoppingCartProvider = ({ children }: any) => {
+  const { dispatch } = useEvent();
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const isItemExists = (id: string) => cart.find((x) => x.productId === id);
@@ -49,6 +57,7 @@ export const ShoppingCartProvider = ({ children }: any) => {
     ];
     localStorage.setItem("cartItems", JSON.stringify(updatedItems));
     setCart(updatedItems);
+    dispatch("SHOW_SNACK_BAR", "Item added cart");
   };
 
   const removeItem = (id: string) => {
@@ -57,6 +66,7 @@ export const ShoppingCartProvider = ({ children }: any) => {
     );
     localStorage.setItem("cartItems", JSON.stringify(updatedItems));
     setCart(updatedItems);
+    dispatch("SHOW_SNACK_BAR", "Item removed from cart");
   };
 
   const increment = (id: string) => {
@@ -71,6 +81,7 @@ export const ShoppingCartProvider = ({ children }: any) => {
     );
     localStorage.setItem("cartItems", JSON.stringify(updatedItems));
     setCart(updatedItems);
+    dispatch("SHOW_SNACK_BAR", "Quantity Updated");
   };
 
   const decrement = (id: string) => {
@@ -80,8 +91,8 @@ export const ShoppingCartProvider = ({ children }: any) => {
         : item
     );
     localStorage.setItem("cartItems", JSON.stringify(updatedItems));
-
     setCart(updatedItems);
+    dispatch("SHOW_SNACK_BAR", "Quantity Updated");
   };
 
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0);

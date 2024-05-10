@@ -50,6 +50,7 @@ const ProductCard = ({
         <Card.Body style={{ paddingRight: "1rem" }}>
           <Link
             href={isAuthenticated ? `/app/products/${id}` : `/products/${id}`}
+            className="text-decoration-none"
           >
             <Card.Title>{name}</Card.Title>
           </Link>

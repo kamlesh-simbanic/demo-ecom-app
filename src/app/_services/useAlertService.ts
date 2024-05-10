@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 export { useAlertService };
 
@@ -6,54 +6,54 @@ export { useAlertService };
 const alertStore = create<IAlertStore>(() => ({}));
 
 function useAlertService(): IAlertService {
-    const { alert } = alertStore();
+  const { alert } = alertStore();
 
-    return {
-        alert,
-        success: (message: string, showAfterRedirect = false) => {
-            const type = 'alert-success';
-            alertStore.setState({
-                alert: { type, message, showAfterRedirect }
-            });
-        },
-        error: (message: string, showAfterRedirect = false) => {
-            const type = 'alert-danger';
-            alertStore.setState({
-                alert: { type, message, showAfterRedirect }
-            });
-        },
-        clear: () => {
-            alertStore.setState(state => {
-                let alert = state.alert;
-    
-                // if showAfterRedirect is true the alert is kept for
-                // one route change (e.g. after successful registration)
-                if (alert?.showAfterRedirect) {
-                    alert.showAfterRedirect = false;
-                } else {
-                    alert = undefined;
-                }
-    
-                return { alert };
-            });
+  return {
+    alert,
+    success: (message: string, showAfterRedirect = false) => {
+      const type = "success";
+      alertStore.setState({
+        alert: { type, message, showAfterRedirect },
+      });
+    },
+    error: (message: string, showAfterRedirect = false) => {
+      const type = "danger";
+      alertStore.setState({
+        alert: { type, message, showAfterRedirect },
+      });
+    },
+    clear: () => {
+      alertStore.setState((state) => {
+        let alert = state.alert;
+
+        // if showAfterRedirect is true the alert is kept for
+        // one route change (e.g. after successful registration)
+        if (alert?.showAfterRedirect) {
+          alert.showAfterRedirect = false;
+        } else {
+          alert = undefined;
         }
-    }
+
+        return { alert };
+      });
+    },
+  };
 }
 
 // interfaces
 
 interface IAlert {
-    type: string,
-    message: string,
-    showAfterRedirect: boolean
+  type: string;
+  message: string;
+  showAfterRedirect: boolean;
 }
 
 interface IAlertStore {
-    alert?: IAlert
+  alert?: IAlert;
 }
 
 interface IAlertService extends IAlertStore {
-    success: (message: string, showAfterRedirect?: boolean) => void,
-    error: (message: string, showAfterRedirect?: boolean) => void,
-    clear: () => void,
+  success: (message: string, showAfterRedirect?: boolean) => void;
+  error: (message: string, showAfterRedirect?: boolean) => void;
+  clear: () => void;
 }
