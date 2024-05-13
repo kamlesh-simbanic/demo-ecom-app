@@ -1,7 +1,6 @@
 "use client";
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { signIn } from "next-auth/react";
 import { useUserService } from "@/app/_services";
 
 export default function SignIn() {
@@ -48,9 +47,7 @@ export default function SignIn() {
           onChange={(e) => onChangeHandle(e.target)}
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
+
       <Button variant="primary" type="submit">
         Submit
       </Button>
