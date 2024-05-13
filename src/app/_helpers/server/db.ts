@@ -10,6 +10,7 @@ mongoose.Promise = global.Promise;
 export const db = {
   User: userModel(),
   Product: ProductModel(),
+  Order: OrderModel(),
 };
 
 // mongoose models with schema definitions
@@ -63,4 +64,58 @@ function ProductModel() {
   });
 
   return mongoose.models.Product || mongoose.model("Product", schema);
+}
+
+function OrderModel() {
+  const schema = new Schema(
+    {
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      },
+      items: [
+        {
+          pId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Product",
+            required: true,
+          },
+          quantity: {
+            type: Number,
+            required: true,
+          },
+          price: {
+            type: Number,
+            required: true,
+          },
+          name: {
+            type: String,
+            required: true,
+          },
+          amount: {
+            type: Number,
+            required: true,
+          },
+        },
+      ],
+    },
+    {
+      timestamps: true,
+    }
+  );
+
+  schema.set("toJSON", {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc, ret) {
+      delete ret._id;
+    },
+  });
+
+  return mongoose.models.Product || mongoose.model("Order", schema);
 }

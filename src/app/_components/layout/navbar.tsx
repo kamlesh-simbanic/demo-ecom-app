@@ -9,7 +9,7 @@ function NavbarComponent({ isAuthenticated }: any) {
       <div className="container-fluid">
         <NavLink
           className="navbar-brand"
-          href="{isAuthenticated ? '/app' : '/home'}"
+          href={isAuthenticated ? "/app" : "/home"}
         >
           OG SHOP
         </NavLink>
@@ -32,7 +32,7 @@ function NavbarComponent({ isAuthenticated }: any) {
             <li className="nav-item">
               <NavLink
                 className="nav-link"
-                href="{isAuthenticated ? '/app' : '/home'}"
+                href={isAuthenticated ? "/app" : "/home"}
               >
                 Home
               </NavLink>

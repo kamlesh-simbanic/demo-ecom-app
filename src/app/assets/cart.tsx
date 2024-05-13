@@ -37,3 +37,8 @@ export const cartColumns: ColumnType<CartItem>[] = [
     },
   },
 ];
+
+export const orderViewCartColumns: ColumnType<CartItem>[] = cartColumns.splice(
+  0,
+  4
+);

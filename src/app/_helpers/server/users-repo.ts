@@ -22,11 +22,11 @@ async function authenticate({
   email: string;
   password: string;
 }) {
-  const user = await User.findOne({ email, hash: password });
+  const user = await User.findOne({ email });
 
-  // if (!(user && bcrypt.compareSync(password, user.hash))) {
-  //   throw "Username or password is incorrect";
-  // }
+  if (!(user && bcrypt.compareSync(password, user.hash))) {
+    throw "Username or password is incorrect";
+  }
 
   // create a jwt token that is valid for 7 days
   const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET!, {
@@ -62,19 +62,16 @@ async function getCurrent() {
 
 async function create(params: any) {
   // validate
-  if (await User.findOne({ username: params.email })) {
-    throw 'Username "' + params.email + '" is already taken';
+  if (await User.findOne({ email: params.email })) {
+    throw 'email "' + params.email + '" is already taken';
   }
 
   const user = new User(params);
 
   // hash password
-  // if (params.password) {
-  //   user.hash = bcrypt.hashSync(params.password, 10);
-  // }
-
-  user.hash = params.password;
-
+  if (params.password) {
+    user.hash = bcrypt.hashSync(params.password, 10);
+  }
   // save user
   await user.save();
 }
