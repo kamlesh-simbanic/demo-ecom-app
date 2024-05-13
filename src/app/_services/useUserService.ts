@@ -25,11 +25,11 @@ function useUserService(): IUserService {
     users,
     user,
     currentUser,
-    login: async (username, password) => {
+    login: async (email, password) => {
       alertService.clear();
       try {
         const currentUser = await fetch.post("/api/account/login", {
-          username,
+          email,
           password,
         });
         userStore.setState({ ...initialState, currentUser });
