@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 mongoose.connect(process.env.MONGODB_URI!).then(() => {
   console.log("Database connected");
+  
 });
 mongoose.Promise = global.Promise;
 
@@ -74,13 +75,33 @@ function OrderModel() {
         ref: "User",
         required: true,
       },
-      total: {
+      houseNo: {
+        type: String,
+        required: true,
+      },
+      street: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      province: {
+        type: String,
+        required: true,
+      },
+      postalCode: {
+        type: String,
+        required: true,
+      },
+      amount: {
         type: Number,
         required: true,
       },
       items: [
         {
-          pId: {
+          productId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Product",
             required: true,
@@ -97,7 +118,7 @@ function OrderModel() {
             type: String,
             required: true,
           },
-          amount: {
+          total: {
             type: Number,
             required: true,
           },
@@ -117,5 +138,5 @@ function OrderModel() {
     },
   });
 
-  return mongoose.models.Product || mongoose.model("Order", schema);
+  return mongoose.models.Order || mongoose.model("Order", schema);
 }

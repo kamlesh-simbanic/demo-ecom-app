@@ -14,6 +14,7 @@ async function login(req: Request) {
 
   // return jwt token in http only cookie
   cookies().set("authorization", token, { httpOnly: true });
+  cookies().set("userID", user.id, { httpOnly: true });
 
   return user;
 }

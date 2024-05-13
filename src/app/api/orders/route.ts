@@ -1,10 +1,20 @@
 import { db } from "@/app/_helpers/server/db";
+import { NextRequest } from "next/server";
 
 const Order = db.Order;
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
+  const userId = req.cookies.get("userID");
+
+  await Order.deleteMany();
+
   const body = await req.json();
-  const order = new Order(body);
+  console.log("body", body);
+
+  const order = new Order({
+    ...body,
+    userId,
+  });
 
   const result = await Order.insertMany([order]);
 
@@ -25,7 +35,8 @@ export async function POST(req: Request) {
   });
 }
 
-export async function GET(req: Request) {
-  const result = await Order.find({});
+export async function GET(req: NextRequest) {
+  const userId = req.cookies.get("userID");
+  const result = await Order.find({ userId });
   return Response.json(result);
 }

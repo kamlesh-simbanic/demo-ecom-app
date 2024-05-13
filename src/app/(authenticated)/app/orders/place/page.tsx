@@ -1,5 +1,6 @@
 "use client";
 
+import { addOrder } from "@/app/_actions/orders";
 import Input from "@/app/_components/input";
 import TableComponent from "@/app/_components/table";
 import { CartItem, orderViewCartColumns } from "@/app/assets/cart";
@@ -25,9 +26,18 @@ export default function PlaceOrder() {
     });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     // Place order logic here
+
+    const payload = {
+      ...address,
+      items: cart,
+      amount: cart.reduce((acc, x) => (acc += x.total), 0),
+    };
+
+    const result = await addOrder(payload);
+    console.log("result", result);
   };
 
   return (

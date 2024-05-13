@@ -1,9 +1,28 @@
 export type Order = {
-  id: number;
-  user: string;
+  _id: number;
+  userId: string;
   amount: number;
-  orderDate: string;
+  orderDate?: string;
+  houseNo: string;
+  street: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  items?: {
+    productId: string;
+    quantity: number;
+    price: number;
+    name: string;
+    total: number;
+  }[];
 };
+
+export type OrderListEntity = Pick<
+  Order,
+  "_id" | "amount" | "orderDate" | "userId"
+>;
+
+export type OrderPayload = Pick<Order, "items" | "amount">;
 
 type ColumnType<T> = {
   key: keyof T;
@@ -13,70 +32,70 @@ type ColumnType<T> = {
 };
 
 export const orderColumns: ColumnType<Order>[] = [
-  { key: "id", label: "ID", sortable: true },
-  { key: "user", label: "User", sortable: true },
+  { key: "_id", label: "ID", sortable: true },
+  { key: "userId", label: "User", sortable: true },
   { key: "amount", label: "Amount", sortable: true },
   { key: "orderDate", label: "Order Date", sortable: true },
 ];
 
-export const orders: Order[] = [
+export const orders: OrderListEntity[] = [
   {
-    id: 1,
-    user: "John Doe",
+    _id: 1,
+    userId: "John Doe",
     amount: 100,
     orderDate: "2024-03-22",
   },
   {
-    id: 2,
-    user: "Jane Smith",
+    _id: 2,
+    userId: "Jane Smith",
     amount: 150,
     orderDate: "2024-03-21",
   },
   {
-    id: 3,
-    user: "Bob Johnson",
+    _id: 3,
+    userId: "Bob Johnson",
     amount: 200,
     orderDate: "2024-03-20",
   },
   {
-    id: 4,
-    user: "Alice Brown",
+    _id: 4,
+    userId: "Alice Brown",
     amount: 120,
     orderDate: "2024-03-19",
   },
   {
-    id: 5,
-    user: "Eve Williams",
+    _id: 5,
+    userId: "Eve Williams",
     amount: 180,
     orderDate: "2024-03-18",
   },
   {
-    id: 6,
-    user: "Michael Davis",
+    _id: 6,
+    userId: "Michael Davis",
     amount: 220,
     orderDate: "2024-03-17",
   },
   {
-    id: 7,
-    user: "Sarah Wilson",
+    _id: 7,
+    userId: "Sarah Wilson",
     amount: 130,
     orderDate: "2024-03-16",
   },
   {
-    id: 8,
-    user: "Kevin Miller",
+    _id: 8,
+    userId: "Kevin Miller",
     amount: 190,
     orderDate: "2024-03-15",
   },
   {
-    id: 9,
-    user: "Linda Garcia",
+    _id: 9,
+    userId: "Linda Garcia",
     amount: 210,
     orderDate: "2024-03-14",
   },
   {
-    id: 10,
-    user: "Brian Martinez",
+    _id: 10,
+    userId: "Brian Martinez",
     amount: 140,
     orderDate: "2024-03-13",
   },
