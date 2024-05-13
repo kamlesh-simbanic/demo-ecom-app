@@ -6,7 +6,7 @@ import axios from "./axios";
 
 export const getProduct = async (id: string): Promise<Product> => {
   try {
-    const res = await axios.get(`http://localhost:4001/api/products/${id}`);
+    const res = await axios.get(`/products/${id}`);
     const product = await res.json();
     return product as Product;
   } catch (error) {
@@ -18,7 +18,6 @@ export const getProduct = async (id: string): Promise<Product> => {
 export async function getProducts(): Promise<Product[]> {
   const res = await axios.get(`/products`);
   const products = await res.json();
-
   revalidatePath(`/app/products`);
   return products as Product[];
 }
