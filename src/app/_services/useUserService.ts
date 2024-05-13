@@ -18,7 +18,7 @@ function useUserService(): IUserService {
   const alertService = useAlertService();
   const fetch = useFetch();
   const router = useRouter();
-  
+
   const { users, user, currentUser } = userStore();
 
   return {
@@ -49,7 +49,7 @@ function useUserService(): IUserService {
       try {
         await fetch.post("/api/account/register", user);
         alertService.success("Registration successful", true);
-        router.push("/siginin");
+        // router.push("/signin");
       } catch (error: any) {
         alertService.error(error);
       }
