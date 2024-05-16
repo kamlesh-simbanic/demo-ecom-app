@@ -6,12 +6,14 @@ import TableComponent from "@/app/_components/table";
 import { CartItem, orderViewCartColumns } from "@/app/assets/cart";
 import { useShoppingCart } from "@/app/providers/cart";
 import useEvent from "@/app/utils/use-event";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 export default function PlaceOrder() {
   const { cart, removeOrderedItems } = useShoppingCart();
   const { dispatch } = useEvent();
+  const router = useRouter();
 
   const [address, setAddress] = useState({
     houseNo: "",
@@ -37,9 +39,10 @@ export default function PlaceOrder() {
       amount: cart.reduce((acc, x) => (acc += x.total), 0),
     };
 
-    await addOrder(payload);
-    dispatch("SHOW_SNACK_BAR", "Order Placed Successfully");
+    const result = await addOrder(payload);
 
+    dispatch("SHOW_SNACK_BAR", "Order Placed Successfully");
+    router.push(`/app/orders/${result.id}`);
     removeOrderedItems(cart.map((x) => x.productId));
   };
 

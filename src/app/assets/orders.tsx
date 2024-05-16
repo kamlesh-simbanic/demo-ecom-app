@@ -42,7 +42,11 @@ export const orderColumns: ColumnType<OrderListEntity>[] = [
     label: "ID",
     sortable: true,
     Render: (item) => {
-      return <Link href={`/app/orders/${item.id}`}>{item.id}</Link>;
+      return (
+        <Link href={`/app/orders/${item.id}`} className="text-decoration-none">
+          {item.id}
+        </Link>
+      );
     },
   },
   {
@@ -59,3 +63,16 @@ export const orderColumns: ColumnType<OrderListEntity>[] = [
     },
   },
 ];
+
+export const initialOrder: Order = {
+  id: 0,
+  userId: "",
+  amount: 0,
+  orderDate: "",
+  houseNo: "",
+  street: "",
+  city: "",
+  province: "",
+  postalCode: "",
+  items: [],
+};
