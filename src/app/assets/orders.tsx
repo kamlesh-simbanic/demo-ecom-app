@@ -1,3 +1,7 @@
+import RenderDate from "@/app/_components/RenderDate";
+import { NavLink } from "../_components";
+import Link from "next/link";
+
 export type Order = {
   id: number;
   userId: string;
@@ -37,6 +41,9 @@ export const orderColumns: ColumnType<OrderListEntity>[] = [
     key: "id",
     label: "ID",
     sortable: true,
+    Render: (item) => {
+      return <Link href={`/app/orders/${item.id}`}>{item.id}</Link>;
+    },
   },
   {
     key: "amount",
@@ -47,8 +54,8 @@ export const orderColumns: ColumnType<OrderListEntity>[] = [
     key: "createdAt",
     label: "Order Date",
     sortable: true,
-    // Render: (item) => {
-    //   return <RenderDate date={item.createdAt!} />;
-    // },
+    Render: (item) => {
+      return <RenderDate date={item.createdAt!} />;
+    },
   },
 ];
