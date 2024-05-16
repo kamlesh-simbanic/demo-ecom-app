@@ -6,14 +6,13 @@ const Order = db.Order;
 export async function POST(req: NextRequest) {
   const userId = req.cookies.get("userID");
 
-  await Order.deleteMany();
+  // await Order.deleteMany();
 
   const body = await req.json();
-  console.log("body", body);
 
   const order = new Order({
     ...body,
-    userId,
+    userId: userId?.value,
   });
 
   const result = await Order.insertMany([order]);
@@ -36,7 +35,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const userId = req.cookies.get("userID");
+  const userId = req.cookies.get("userID")?.value;
   const result = await Order.find({ userId });
   return Response.json(result);
 }

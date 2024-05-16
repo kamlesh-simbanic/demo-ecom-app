@@ -17,6 +17,7 @@ type ShoppingCartContextType = {
   increment: (id: string) => void;
   decrement: (id: string) => void;
   totalItems: number;
+  removeOrderedItems: (id: string[]) => void;
 };
 
 const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(
@@ -97,6 +98,12 @@ export const ShoppingCartProvider = ({ children }: any) => {
 
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
+  const removeOrderedItems = (ids: string[]) => {
+    const updatedItems = cart.filter((item) => !ids.includes(item.productId));
+    localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+    setCart(updatedItems);
+  };
+
   useEffect(() => {
     const items = JSON.parse(
       localStorage.getItem("cartItems") ?? "[]"
@@ -106,7 +113,15 @@ export const ShoppingCartProvider = ({ children }: any) => {
 
   return (
     <ShoppingCartContext.Provider
-      value={{ cart, addItem, removeItem, increment, decrement, totalItems }}
+      value={{
+        cart,
+        addItem,
+        removeItem,
+        increment,
+        decrement,
+        totalItems,
+        removeOrderedItems,
+      }}
     >
       {children}
     </ShoppingCartContext.Provider>
