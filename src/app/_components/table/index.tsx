@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./style.css";
+import { Spinner } from "../Spinner";
 
 type ColumnType<T> = {
   key: string;
@@ -17,11 +18,13 @@ type ColumnType<T> = {
 type PropsType<T> = {
   rows: T[];
   columns: ColumnType<T>[];
+  isLoading?: boolean;
 };
 
 const TableComponent = <T extends Record<string, any>>({
   rows,
   columns,
+  isLoading,
 }: PropsType<T>) => {
   const [sortBy, setSortBy] = useState<keyof T | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
@@ -89,15 +92,23 @@ const TableComponent = <T extends Record<string, any>>({
             </tr>
           </thead>
           <tbody>
-            {currentRows.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {columns.map((column) => (
-                  <td key={column.key.toString()}>
-                    {column.Render ? column.Render(row) : row[column.key]}
-                  </td>
-                ))}
+            {isLoading ? (
+              <tr>
+                <td colSpan={columns.length}>
+                  <Spinner />
+                </td>
               </tr>
-            ))}
+            ) : (
+              currentRows.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {columns.map((column) => (
+                    <td key={column.key.toString()}>
+                      {column.Render ? column.Render(row) : row[column.key]}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
           </tbody>
         </Table>
       </div>

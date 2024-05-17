@@ -65,7 +65,7 @@ export default function Content({
 
       <Row>
         <Col md={3} sm={12}>
-          <Form.Label className="fw-bolder">Image:</Form.Label>
+          <Form.Label>Image:</Form.Label>
         </Col>
         <Col md={6} sm={12}>
           <Image

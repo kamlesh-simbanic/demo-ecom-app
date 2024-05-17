@@ -5,10 +5,13 @@ import { orderColumns, OrderListEntity } from "@/app/assets/orders";
 import { useEffect, useState } from "react";
 
 export default function Orders() {
+  const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState<OrderListEntity[]>([]);
 
   const fetchOrders = async () => {
+    setIsLoading(true);
     const result = await getOrders();
+    setIsLoading(false);
     setOrders(result);
   };
 
@@ -19,7 +22,11 @@ export default function Orders() {
   return (
     <>
       <h1>Orders</h1>
-      <Table<OrderListEntity> rows={orders} columns={orderColumns} />
+      <Table<OrderListEntity>
+        rows={orders}
+        columns={orderColumns}
+        isLoading={isLoading}
+      />
     </>
   );
 }

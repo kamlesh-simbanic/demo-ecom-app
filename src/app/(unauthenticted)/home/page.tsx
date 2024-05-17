@@ -1,10 +1,11 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { getProducts } from "@/app/_actions/product";
+import dynamic from "next/dynamic";
 
-export default function Home() {
-  return (
-    <>
-      <h1>Home</h1>
-    </>
-  );
+const ProductList = dynamic(
+  () => import("@/app/_components/products/product-list")
+);
+
+export default async function Products() {
+  const products = await getProducts();
+  return <ProductList products={products} />;
 }

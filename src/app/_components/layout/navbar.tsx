@@ -37,13 +37,13 @@ function NavbarComponent({ isAuthenticated }: any) {
                 Home
               </NavLink>
             </li> */}
-            {!isAuthenticated && (
+            {/* {!isAuthenticated && (
               <li className="nav-item">
                 <NavLink className="nav-link" href="/products">
                   Products
                 </NavLink>
               </li>
-            )}
+            )} */}
             {isAuthenticated && (
               <>
                 <li className="nav-item">
