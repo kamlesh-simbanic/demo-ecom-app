@@ -14,8 +14,12 @@ const ProductList = ({ products }: { products: Product[] }) => {
     <Row>
       {products.length > 0 ? (
         products.map((product: Product) => (
-          <Col md={3} lg={3} sm={6} className="mb-2" key={product.id}>
-            <ProductCard product={product} isAuthenticated={isAuthenticated} />
+          <Col md={6} lg={4} xl={3} sm={12} className="p-2 " key={product.id}>
+            <ProductCard
+              key={product.id}
+              product={product}
+              isAuthenticated={isAuthenticated}
+            />
           </Col>
         ))
       ) : (

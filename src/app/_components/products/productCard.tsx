@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useShoppingCart } from "../../providers/cart";
 import Image from "next/image";
 
-const imageSize = { width: 300, height: 300 };
+const imageSize = { width: 250, height: 200 };
 
 export const currencyFormatter = (value: number) => {
   return value.toLocaleString("en-US", {
@@ -31,7 +31,7 @@ const ProductCard = ({
     <>
       <Card
         style={{ width: "18rem" }}
-        className="border border-danger overflow-hidden"
+        className="border border-danger overflow-hidden d-flex flex-column flex-sm-row flex-row flex-md-column"
       >
         <div
           style={{
