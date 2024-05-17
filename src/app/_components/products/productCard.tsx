@@ -23,7 +23,7 @@ const ProductCard = ({
   product: Product;
   isAuthenticated: boolean;
 }) => {
-  const { id, name, shortDesc, price } = product;
+  const { id, name, shortDesc, price, quantity } = product;
 
   const { addItem } = useShoppingCart();
 
@@ -56,10 +56,17 @@ const ProductCard = ({
           </Link>
           <Card.Text>{shortDesc}</Card.Text>
           <Card.Text>{currencyFormatter(price)}</Card.Text>
-          {isAuthenticated && (
-            <Button variant="primary" onClick={() => addItem(product)}>
-              Add Cart
-            </Button>
+
+          {quantity === 0 ? (
+            <Card.Text className="text-danger">Out of Stock</Card.Text>
+          ) : (
+            <>
+              {isAuthenticated && (
+                <Button variant="primary" onClick={() => addItem(product)}>
+                  Add Cart
+                </Button>
+              )}
+            </>
           )}
         </Card.Body>
       </Card>

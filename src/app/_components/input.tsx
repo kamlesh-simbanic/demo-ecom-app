@@ -7,11 +7,12 @@ interface InputProps {
   type?: string;
   name: string;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
   readOnly?: boolean;
   label?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
+  disabled?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,6 +24,7 @@ const Input: React.FC<InputProps> = ({
   label,
   onChange,
   error,
+  disabled,
 }) => {
   return (
     <Form.Group controlId={name}>
@@ -33,7 +35,8 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        disabled={readOnly}
+        disabled={disabled}
+        readOnly={readOnly}
         size="sm"
       />
       {error && <span className="text-danger">{error}</span>}

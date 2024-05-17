@@ -52,8 +52,8 @@ export default function PlaceOrder() {
     const result = await addOrder(payload);
 
     dispatch("SHOW_SNACK_BAR", "Order Placed Successfully");
-    router.push(`/app/orders/${result.id}`);
-    removeOrderedItems(cart.map((x) => x.productId));
+    // router.push(`/app/orders/${result.id}`);
+    // removeOrderedItems(cart.map((x) => x.productId));
   };
 
   return (

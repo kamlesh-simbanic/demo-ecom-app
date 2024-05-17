@@ -71,7 +71,7 @@ export default function SignUp() {
   return (
     <>
       <h3>Sign Up</h3>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} autoComplete="off">
         <Input
           placeholder="Enter name"
           name="name"

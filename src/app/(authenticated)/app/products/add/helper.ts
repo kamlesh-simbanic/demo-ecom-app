@@ -1,0 +1,27 @@
+import { Product } from "@/app/assets/products";
+import { ErrorValidation } from "@/app/types/common";
+
+export const validateProduct = (product: Product) => {
+  const errors: ErrorValidation = {};
+
+  if (!product.name) {
+    errors.name = "Name is required";
+  }
+
+  if (product.price === undefined || product.price <= 0) {
+    errors.price = "Price must be a positive number";
+  }
+
+  if (!product.shortDesc) {
+    errors.shortDesc = "Short description is required";
+  }
+
+  if (product.quantity === undefined || product.quantity <= 0) {
+    errors.quantity = "Quantity must be a positive number";
+  }
+
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors,
+  };
+};
