@@ -9,6 +9,8 @@ import useEvent from "@/app/utils/use-event";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { validateAddress } from "./helper";
+import { ErrorValidation } from "@/app/types/common";
 
 export default function PlaceOrder() {
   const { cart, removeOrderedItems } = useShoppingCart();
@@ -23,6 +25,8 @@ export default function PlaceOrder() {
     postalCode: "",
   });
 
+  const [validations, setValidations] = useState<ErrorValidation>({});
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress({
       ...address,
@@ -32,6 +36,12 @@ export default function PlaceOrder() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    const { errors, isValid } = validateAddress(address);
+
+    setValidations(errors);
+
+    if (!isValid) return;
 
     const payload = {
       ...address,
@@ -57,6 +67,7 @@ export default function PlaceOrder() {
               name="houseNo"
               value={address.houseNo}
               onChange={handleChange}
+              error={validations["houseNo"]}
             />
           </Col>
           <Col lg={9} sm={12}>
@@ -65,6 +76,7 @@ export default function PlaceOrder() {
               name="street"
               value={address.street}
               onChange={handleChange}
+              error={validations["street"]}
             />
           </Col>
           <Col lg={6} sm={12}>
@@ -73,6 +85,7 @@ export default function PlaceOrder() {
               name="city"
               value={address.city}
               onChange={handleChange}
+              error={validations["city"]}
             />
           </Col>
           <Col lg={6} sm={12}>
@@ -81,6 +94,7 @@ export default function PlaceOrder() {
               name="province"
               value={address.province}
               onChange={handleChange}
+              error={validations["province"]}
             />
           </Col>
           <Col lg={6} sm={12}>
@@ -89,6 +103,7 @@ export default function PlaceOrder() {
               name="postalCode"
               value={address.postalCode}
               onChange={handleChange}
+              error={validations["postalCode"]}
             />
           </Col>
         </Row>

@@ -2,6 +2,10 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useUserService } from "@/app/_services";
+import { ErrorValidation } from "@/app/types/common";
+import Input from "@/app/_components/input";
+import StackRow from "@/app/_components/stack-row";
+import SubmitButton from "@/app/_components/SubmitButton";
 
 export default function SignIn() {
   const userService = useUserService();
@@ -10,47 +14,67 @@ export default function SignIn() {
     email: "",
     password: "",
   });
+  const [validations, setValidations] = useState<ErrorValidation>({});
 
   const onChangeHandle = ({ name, value }: { name: string; value: string }) => {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const validate = (): {
+    isValid: boolean;
+    errors: ErrorValidation;
+  } => {
+    const errors: ErrorValidation = {};
+
+    if (!data.email) {
+      errors.email = "Email is required";
+    }
+
+    if (!data.password) {
+      errors.password = "Password is required";
+    }
+    return {
+      isValid: Object.keys(errors).length === 0,
+      errors,
+    };
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const { errors, isValid } = validate();
+
+    setValidations(errors);
+
+    if (!isValid) return;
 
     await userService.login(data.email, data.password);
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          type="email"
-          name="email"
+    <>
+      <h3>Sign In</h3>
+      <Form onSubmit={handleSubmit}>
+        <Input
+          label="Email"
           placeholder="Enter email"
-          value={data.email}
+          name="email"
           onChange={(e) => onChangeHandle(e.target)}
+          error={validations.email}
         />
-        <Form.Text className="text-muted">
-          We will never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
+        <Input
+          label="password"
           type="password"
           placeholder="Password"
-          value={data.password}
           name="password"
           onChange={(e) => onChangeHandle(e.target)}
+          error={validations.password}
         />
-      </Form.Group>
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+        <StackRow>
+          <SubmitButton label={"Sign In"} />
+        </StackRow>
+      </Form>
+    </>
   );
 }

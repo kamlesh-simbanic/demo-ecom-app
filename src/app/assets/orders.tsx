@@ -24,7 +24,7 @@ export type Order = {
 
 export type OrderListEntity = Pick<
   Order,
-  "id" | "amount" | "orderDate" | "userId" | "createdAt"
+  "id" | "amount" | "orderDate" | "userId" | "createdAt" | "items"
 >;
 
 export type OrderPayload = Pick<Order, "items" | "amount">;
@@ -44,10 +44,16 @@ export const orderColumns: ColumnType<OrderListEntity>[] = [
     Render: (item) => {
       return (
         <Link href={`/app/orders/${item.id}`} className="text-decoration-none">
-          {item.id}
+          {item.id.toString().slice(6)}
         </Link>
       );
     },
+  },
+  {
+    key: "items",
+    label: "No of Items",
+    sortable: true,
+    Render: (item) => <span>{item.items.length}</span>,
   },
   {
     key: "amount",

@@ -130,6 +130,8 @@ export default function OrderDetails({ params }: { params: { id: string } }) {
           rows={order.items}
           columns={orderViewCartColumns}
         />
+
+        <h3>Total: {order.amount}</h3>
       </Row>
     </Container>
   );
