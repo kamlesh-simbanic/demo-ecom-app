@@ -52,7 +52,7 @@ const TableComponent = <T extends Record<string, any>>({
   };
 
   const handleRowsPerPageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setRowsPerPage(Number(event.target.value));
     setCurrentPage(1); // Reset to first page on rows per page change
