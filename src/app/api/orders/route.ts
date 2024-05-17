@@ -3,8 +3,6 @@ import { OrderPayload } from "@/app/assets/orders";
 import mongoose from "mongoose";
 import { NextRequest } from "next/server";
 
-const { ObjectId } = mongoose.Types;
-
 const Order = db.Order;
 const Product = db.Product;
 

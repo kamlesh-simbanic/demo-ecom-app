@@ -9,6 +9,7 @@ import React, {
 import { Product } from "../assets/products";
 import { CartItem } from "../assets/cart";
 import useEvent from "../utils/use-event";
+import { getProduct } from "../_actions/product";
 
 type ShoppingCartContextType = {
   cart: CartItem[];
@@ -104,7 +105,27 @@ export const ShoppingCartProvider = ({ children }: any) => {
     setCart(updatedItems);
   };
 
+  const getCart = async () => {
+    const items = JSON.parse(
+      localStorage.getItem("cartItems") ?? "[]"
+    ) as CartItem[];
+
+    let cartItems: CartItem[] = [];
+
+    if (items.length > 0)
+      await items.reduce(async (previousPromise, item) => {
+        await previousPromise;
+        const result = await getProduct(item.productId);
+        if (result.quantity > 0) {
+          cartItems.push(item);
+        } else cartItems.push({ ...item, soldOut: true });
+      }, Promise.resolve());
+
+    setCart(cartItems);
+  };
+
   useEffect(() => {
+    getCart();
     const items = JSON.parse(
       localStorage.getItem("cartItems") ?? "[]"
     ) as CartItem[];

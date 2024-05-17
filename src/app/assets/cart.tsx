@@ -8,6 +8,7 @@ export type CartItem = {
   quantity: number;
   price: number;
   total: number;
+  soldOut?: boolean;
 };
 
 type ColumnType<T> = {
@@ -24,12 +25,17 @@ export const cartColumns: ColumnType<CartItem>[] = [
     sortable: true,
     Render: (item) => {
       return (
-        <Link
-          href={`/app/products/${item.productId}`}
-          className="text-decoration-none"
-        >
-          {item.name}
-        </Link>
+        <>
+          <Link
+            href={`/app/products/${item.productId}`}
+            className="text-decoration-none"
+          >
+            {item.name}
+          </Link>{" "}
+          {item.soldOut && (
+            <span className="fw-bolder text-danger">(Out of Stock)</span>
+          )}
+        </>
       );
     },
   },
