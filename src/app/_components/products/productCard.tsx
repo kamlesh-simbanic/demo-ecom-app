@@ -56,12 +56,11 @@ const ProductCard = ({
           </Link>
           <Card.Text>{shortDesc}</Card.Text>
           <Card.Text>{currencyFormatter(price)}</Card.Text>
-
-          {quantity === 0 ? (
-            <Card.Text className="text-danger">Out of Stock</Card.Text>
-          ) : (
+          {isAuthenticated && (
             <>
-              {isAuthenticated && (
+              {quantity === 0 ? (
+                <Card.Text className="text-danger">Out of Stock</Card.Text>
+              ) : (
                 <Button variant="primary" onClick={() => addItem(product)}>
                   Add Cart
                 </Button>

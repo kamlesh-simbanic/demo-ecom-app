@@ -42,21 +42,6 @@ export default async function ProductDetails({
     <>
       <h1>Product Details Page</h1>
       <Content product={product} readOnly={true} />
-
-      <Suspense fallback={<p>Loading Featured Products</p>}>
-        <Product />
-      </Suspense>
-      <Suspense fallback={<p>Loading Reviews</p>}>
-        <Review />
-      </Suspense>
     </>
   );
 }
-
-const Product = async () => {
-  return <Products />;
-};
-
-const Review = async () => {
-  return <div>Review</div>;
-};

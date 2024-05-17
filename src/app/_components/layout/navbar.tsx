@@ -29,14 +29,14 @@ function NavbarComponent({ isAuthenticated }: any) {
             className="navbar-nav me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
           >
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink
                 className="nav-link"
                 href={isAuthenticated ? "/app" : "/home"}
               >
                 Home
               </NavLink>
-            </li>
+            </li> */}
             {!isAuthenticated && (
               <li className="nav-item">
                 <NavLink className="nav-link" href="/products">
