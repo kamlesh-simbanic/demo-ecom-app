@@ -28,24 +28,31 @@ export default function Content({
         disabled={readOnly}
         error={validations["name"]}
       />
-      <Input
-        type="number"
-        name="price"
-        label="Price"
-        value={product.price}
-        onChange={onChangeHandle}
-        disabled={readOnly}
-        error={validations["price"]}
-      />
-      <Input
-        type="number"
-        name="quantity"
-        label="Quantity"
-        value={product.quantity}
-        onChange={onChangeHandle}
-        disabled={readOnly}
-        error={validations["quantity"]}
-      />
+      <Row>
+        <Col md={6} xs={12}>
+          <Input
+            type="number"
+            name="price"
+            label="Price"
+            value={product.price}
+            onChange={onChangeHandle}
+            disabled={readOnly}
+            error={validations["price"]}
+          />
+        </Col>
+        <Col md={6} xs={12}>
+          <Input
+            type="number"
+            name="quantity"
+            label="Quantity"
+            value={product.quantity}
+            onChange={onChangeHandle}
+            disabled={readOnly}
+            error={validations["quantity"]}
+          />
+        </Col>
+      </Row>
+
       <Input
         type="text"
         name="shortDesc"

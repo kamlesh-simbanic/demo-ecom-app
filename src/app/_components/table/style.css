@@ -1,0 +1,11 @@
+.table-container {
+    height: 400px; /* Adjust the height as needed */
+    overflow-y: auto;
+  }
+  
+  .table-container thead {
+    position: sticky;
+    top: 0;
+    background-color: white; /* Ensure the background matches the table */
+    z-index: 1; /* Ensure the header stays above the table rows */
+  }

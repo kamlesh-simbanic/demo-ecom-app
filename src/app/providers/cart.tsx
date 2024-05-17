@@ -19,6 +19,7 @@ type ShoppingCartContextType = {
   decrement: (id: string) => void;
   totalItems: number;
   removeOrderedItems: (id: string[]) => void;
+  enableCheckout: () => boolean;
 };
 
 const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(
@@ -105,6 +106,16 @@ export const ShoppingCartProvider = ({ children }: any) => {
     setCart(updatedItems);
   };
 
+  const enableCheckout = function () {
+    let enable = false;
+    for (const c of cart) {
+      if (!c.soldOut) {
+        enable = true;
+      }
+    }
+    return enable;
+  };
+
   const getCart = async () => {
     const items = JSON.parse(
       localStorage.getItem("cartItems") ?? "[]"
@@ -142,6 +153,7 @@ export const ShoppingCartProvider = ({ children }: any) => {
         decrement,
         totalItems,
         removeOrderedItems,
+        enableCheckout,
       }}
     >
       {children}

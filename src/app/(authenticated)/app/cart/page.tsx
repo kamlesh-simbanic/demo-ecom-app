@@ -3,10 +3,10 @@ import { CartItem, cartColumns } from "@/app/assets/cart";
 import TableComponent from "@/app/_components/table";
 import { useShoppingCart } from "@/app/providers/cart";
 import Button from "@/app/_components/button";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Cart() {
-  const { cart } = useShoppingCart();
+  const { cart, enableCheckout } = useShoppingCart();
   const router = useRouter();
 
   return (
@@ -17,6 +17,7 @@ export default function Cart() {
       <Button
         label={"Check Out"}
         onClick={() => router.push("/app/orders/place")}
+        disabled={!enableCheckout()}
       />
     </>
   );
