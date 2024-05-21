@@ -3,6 +3,7 @@ import { getProduct } from "@/app/_actions/product";
 import Content from "@/app/_components/products/Details";
 import Link from "next/link";
 import { Metadata, ResolvingMetadata } from "next";
+import StackRow from "@/app/_components/stack-row";
 
 type Props = {
   params: { id: string };
@@ -38,16 +39,14 @@ export default async function ProductDetails({
   return (
     <>
       <Content product={product} readOnly={true} />
-      <Row>
-        <Col xs={12} md={3}>
-          <Link
-            href={`/app/products/${params.id}/edit`}
-            className=" btn btn-info"
-          >
-            Edit
-          </Link>
-        </Col>
-      </Row>
+      <StackRow>
+        <Link
+          href={`/app/products/${params.id}/edit`}
+          className=" btn btn-info"
+        >
+          Edit
+        </Link>
+      </StackRow>
     </>
   );
 }

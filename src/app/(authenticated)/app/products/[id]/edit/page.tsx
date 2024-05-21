@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import Button from "@/app/_components/button";
 import Content from "@/app/_components/products/Details";
 import useEvent from "@/app/utils/use-event";
+import StackRow from "@/app/_components/stack-row";
 
 export default function ProductEdit({ params }: { params: { id: string } }) {
   const { dispatch } = useEvent();
@@ -54,23 +55,19 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
         readOnly={false}
         onChangeHandle={onChangeHandle}
       />
-      <Row>
-        <Col xs={12} md={3}>
-          <Button label="Save" onClick={saveProduct} />
-        </Col>
-        <Col xs={12} md={3}>
-          <Button
-            label="Delete"
-            variant="danger"
-            onClick={() => {
-              dispatch("DELETE_MODAL_SHOW", {
-                content: product.name,
-                onConfirm: deleteProduct,
-              });
-            }}
-          />
-        </Col>
-      </Row>
+      <StackRow>
+        <Button label="Save" onClick={saveProduct} />
+        <Button
+          label="Delete"
+          variant="danger"
+          onClick={() => {
+            dispatch("DELETE_MODAL_SHOW", {
+              content: product.name,
+              onConfirm: deleteProduct,
+            });
+          }}
+        />
+      </StackRow>
     </>
   );
 }
