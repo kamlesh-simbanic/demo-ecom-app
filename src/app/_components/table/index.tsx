@@ -27,7 +27,7 @@ type PropsType<T> = {
 const TableComponent = <T extends Record<string, any>>({
   rows,
   columns,
-  isLoading,
+  isLoading = false,
   showPagination = true,
 }: PropsType<T>) => {
   const [sortBy, setSortBy] = useState<keyof T | null>(null);
@@ -69,6 +69,36 @@ const TableComponent = <T extends Record<string, any>>({
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = sortedRows.slice(indexOfFirstRow, indexOfLastRow);
   const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+  if (isLoading)
+    return (
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            {Array.from({ length: 5 }).map((_, idx) => (
+              <th key={idx}>
+                <Placeholder as="span" animation="wave">
+                  <Placeholder xs={12} />
+                </Placeholder>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: 5 }).map((_, rowIdx) => (
+            <tr key={rowIdx}>
+              {Array.from({ length: 5 }).map((_, colIdx) => (
+                <td key={colIdx} className="bg-light">
+                  <Placeholder as="span" animation="wave">
+                    <Placeholder xs={12} />
+                  </Placeholder>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    );
 
   return (
     <>
