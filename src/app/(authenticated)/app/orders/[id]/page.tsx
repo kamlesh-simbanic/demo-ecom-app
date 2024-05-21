@@ -73,6 +73,7 @@ export default function OrderDetails({ params }: { params: { id: string } }) {
         <TableComponent<CartItem>
           rows={order.items}
           columns={orderViewCartColumns}
+          showPagination={false}
         />
 
         <h3>Total: {order.amount}</h3>
