@@ -8,8 +8,6 @@ import Col from "react-bootstrap/Col";
 import "./style.css";
 import { Placeholder } from "react-bootstrap";
 
-import { Spinner } from "../Spinner";
-
 type ColumnType<T> = {
   key: string;
   label: string;
@@ -42,6 +40,7 @@ const TableComponent = <T extends Record<string, any>>({
       setSortBy(key);
       setSortDirection("asc");
     }
+    setCurrentPage(1); // Reset to first page on rows per page change
   };
 
   const sortedRows = [...rows].sort((a, b) => {
