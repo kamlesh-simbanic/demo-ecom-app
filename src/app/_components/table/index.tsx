@@ -6,6 +6,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./style.css";
+import { Placeholder } from "react-bootstrap";
+
 import { Spinner } from "../Spinner";
 
 type ColumnType<T> = {
@@ -97,7 +99,11 @@ const TableComponent = <T extends Record<string, any>>({
             {isLoading ? (
               <tr>
                 <td colSpan={columns.length}>
-                  <Spinner />
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <Placeholder as="span" animation="wave" key={idx}>
+                      <Placeholder xs={12} md={12} />
+                    </Placeholder>
+                  ))}
                 </td>
               </tr>
             ) : (
