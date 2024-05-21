@@ -16,13 +16,13 @@ export default function ImageSlider() {
           <img src="http://picsum.photos/400/200" />
         </div>
         <div>
-          <img src="http://picsum.photos/400/200" />
+          <img src="http://picsum.photos/500/200" />
         </div>
         <div>
-          <img src="http://picsum.photos/400/200" />
+          <img src="http://picsum.photos/600/200" />
         </div>
         <div>
-          <img src="http://picsum.photos/400/200" />
+          <img src="http://picsum.photos/700/200" />
         </div>
       </Slider>
     </div>
