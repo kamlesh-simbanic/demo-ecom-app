@@ -19,12 +19,14 @@ type PropsType<T> = {
   rows: T[];
   columns: ColumnType<T>[];
   isLoading?: boolean;
+  showPagination?: boolean;
 };
 
 const TableComponent = <T extends Record<string, any>>({
   rows,
   columns,
   isLoading,
+  showPagination = true,
 }: PropsType<T>) => {
   const [sortBy, setSortBy] = useState<keyof T | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
@@ -112,53 +114,55 @@ const TableComponent = <T extends Record<string, any>>({
           </tbody>
         </Table>
       </div>
-      <Row className="align-items-center">
-        <Col xs={12} md={2} className="mb-3 mb-md-0">
-          <Form.Group controlId="rowsPerPage">
-            <Form.Label>Rows per page:</Form.Label>
-            <Form.Control
-              as="select"
-              value={rowsPerPage}
-              onChange={handleRowsPerPageChange}
-            >
-              {[5, 10, 15, 20].map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-        </Col>
-        <Col xs={12} md={10}>
-          <Pagination className="justify-content-md-end">
-            <Pagination.First
-              onClick={() => handlePageChange(1)}
-              disabled={currentPage === 1}
-            />
-            <Pagination.Prev
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            />
-            {Array.from({ length: totalPages }, (_, index) => (
-              <Pagination.Item
-                key={index + 1}
-                active={index + 1 === currentPage}
-                onClick={() => handlePageChange(index + 1)}
+      {showPagination && (
+        <Row className="align-items-center">
+          <Col xs={12} md={2} className="mb-3 mb-md-0">
+            <Form.Group controlId="rowsPerPage">
+              <Form.Label>Rows per page:</Form.Label>
+              <Form.Control
+                as="select"
+                value={rowsPerPage}
+                onChange={handleRowsPerPageChange}
               >
-                {index + 1}
-              </Pagination.Item>
-            ))}
-            <Pagination.Next
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            />
-            <Pagination.Last
-              onClick={() => handlePageChange(totalPages)}
-              disabled={currentPage === totalPages}
-            />
-          </Pagination>
-        </Col>
-      </Row>
+                {[5, 10, 15, 20].map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </Col>
+          <Col xs={12} md={10}>
+            <Pagination className="justify-content-md-end">
+              <Pagination.First
+                onClick={() => handlePageChange(1)}
+                disabled={currentPage === 1}
+              />
+              <Pagination.Prev
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              />
+              {Array.from({ length: totalPages }, (_, index) => (
+                <Pagination.Item
+                  key={index + 1}
+                  active={index + 1 === currentPage}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              />
+              <Pagination.Last
+                onClick={() => handlePageChange(totalPages)}
+                disabled={currentPage === totalPages}
+              />
+            </Pagination>
+          </Col>
+        </Row>
+      )}
     </>
   );
 };

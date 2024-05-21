@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { validateAddress } from "./helper";
 import { ErrorValidation } from "@/app/types/common";
+import StackRow from "@/app/_components/stack-row";
 
 export default function PlaceOrder() {
   const { cart, removeOrderedItems } = useShoppingCart();
@@ -58,8 +59,13 @@ export default function PlaceOrder() {
 
   return (
     <Container>
-      <h1>Place Order</h1>
       <Form onSubmit={handleSubmit}>
+        <StackRow>
+          <h1>Place Order</h1>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </StackRow>
         <Row>
           <Col lg={3} sm={12}>
             <Input
@@ -113,12 +119,9 @@ export default function PlaceOrder() {
           <TableComponent<CartItem>
             rows={cart}
             columns={orderViewCartColumns}
+            showPagination={false}
           />
         </Row>
-
-        <Button variant="primary" type="submit">
-          Place Order
-        </Button>
       </Form>
     </Container>
   );
