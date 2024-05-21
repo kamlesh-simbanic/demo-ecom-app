@@ -30,6 +30,7 @@ export default function RootLayout({
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            background-color:white !important;
           }
           main {
             flex: 1;
