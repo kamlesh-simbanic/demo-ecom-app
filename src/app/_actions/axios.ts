@@ -4,7 +4,7 @@ const headers = new Headers();
 
 headers.set("Content-Type", "application/json");
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = `${process.env.API_URL}/api`;
 const httpClient = async (url: string, method = "GET", data?: any) => {
   const cookiesData = cookies().getAll();
 
