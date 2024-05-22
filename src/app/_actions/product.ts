@@ -15,7 +15,7 @@ export const getProduct = async (id: string): Promise<Product> => {
   }
 };
 
-export async function getProducts(): Promise<Product[]> {
+export async function getProducts() {
   const res = await axios.get(`/products`);
   const products = await res.json();
   revalidatePath(`/app/products`);
