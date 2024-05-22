@@ -1,3 +1,5 @@
+"use server";
+
 import { auth } from "@/app/_helpers/server";
 import { Product } from "@/app/assets/products";
 import dynamic from "next/dynamic";
@@ -7,7 +9,7 @@ const ProductCard = dynamic(
   () => import("@/app/_components/products/productCard")
 );
 
-const ProductList = ({ products }: { products: Product[] }) => {
+const ProductList = async ({ products }: { products: Product[] }) => {
   const isAuthenticated = auth.isAuthenticated();
 
   return (

@@ -1,26 +1,5 @@
-"use client";
-
-import { Card, Placeholder } from "react-bootstrap";
+import CardList from "@/app/_components/skelton/card-list";
 
 export default function Loading() {
-  return (
-    <div className="d-flex flex-wrap">
-      {Array.from({ length: 5 }).map((_, idx) => (
-        <Card style={{ width: "18rem", margin: "1rem" }} key={idx}>
-          <Card.Img variant="top" as={Placeholder} animation="wave">
-            <Placeholder xs={12} style={{ height: "150px" }} />
-          </Card.Img>
-          <Card.Body>
-            <Card.Title as={Placeholder} animation="wave">
-              <Placeholder xs={6} />
-            </Card.Title>
-            <Card.Text as={Placeholder} animation="wave">
-              <Placeholder xs={7} /> <Placeholder xs={4} />{" "}
-              <Placeholder xs={4} /> <Placeholder xs={6} />
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      ))}
-    </div>
-  );
+  return <CardList />;
 }
