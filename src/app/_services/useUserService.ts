@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { useAlertService } from "@/app/_services";
 import { useFetch } from "@/app/_helpers/client";
@@ -18,6 +18,7 @@ function useUserService(): IUserService {
   const alertService = useAlertService();
   const fetch = useFetch();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const { users, user, currentUser } = userStore();
 
@@ -34,16 +35,15 @@ function useUserService(): IUserService {
         });
         userStore.setState({ ...initialState, currentUser });
 
-        // get return url from query parameters or default to '/'
-        // const returnUrl = searchParams.get("returnUrl") || "/app";
-        router.push("/app");
+        const returnUrl = searchParams.get("returnUrl") || "/app";
+        router.push(returnUrl);
       } catch (error: any) {
         alertService.error(error);
       }
     },
     logout: async () => {
       await fetch.post("/api/account/logout");
-      router.replace("/signin");
+      router.replace(`/signin?returnUrl=${window.location.pathname}`);
     },
     register: async (user) => {
       try {
