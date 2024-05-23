@@ -1,3 +1,5 @@
+"use client";
+
 import Input from "@/app/_components/input";
 import TableComponent from "@/app/_components/table";
 import { CartItem, orderViewCartColumns } from "@/app/assets/cart";
