@@ -1,17 +1,15 @@
 "use client";
 
 import { addOrder } from "@/app/_actions/orders";
-import Input from "@/app/_components/input";
-import TableComponent from "@/app/_components/table";
-import { CartItem, orderViewCartColumns } from "@/app/assets/cart";
 import { useShoppingCart } from "@/app/providers/cart";
 import useEvent from "@/app/utils/use-event";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 import { validateAddress } from "./helper";
 import { ErrorValidation } from "@/app/types/common";
 import StackRow from "@/app/_components/stack-row";
+import OrderContent from "../content/details";
 
 export default function PlaceOrder() {
   const { cart, removeOrderedItems } = useShoppingCart();
@@ -66,62 +64,14 @@ export default function PlaceOrder() {
             Submit
           </Button>
         </StackRow>
-        <Row>
-          <Col lg={3} sm={12}>
-            <Input
-              label="House No"
-              name="houseNo"
-              value={address.houseNo}
-              onChange={handleChange}
-              error={validations["houseNo"]}
-            />
-          </Col>
-          <Col lg={9} sm={12}>
-            <Input
-              label="Street"
-              name="street"
-              value={address.street}
-              onChange={handleChange}
-              error={validations["street"]}
-            />
-          </Col>
-          <Col lg={6} sm={12}>
-            <Input
-              label="City"
-              name="city"
-              value={address.city}
-              onChange={handleChange}
-              error={validations["city"]}
-            />
-          </Col>
-          <Col lg={6} sm={12}>
-            <Input
-              label="Province"
-              name="province"
-              value={address.province}
-              onChange={handleChange}
-              error={validations["province"]}
-            />
-          </Col>
-          <Col lg={6} sm={12}>
-            <Input
-              label="Postal Code"
-              name="postalCode"
-              value={address.postalCode}
-              onChange={handleChange}
-              error={validations["postalCode"]}
-            />
-          </Col>
-        </Row>
 
-        <Row className="p-2">
-          <h3>Order Items</h3>
-          <TableComponent<CartItem>
-            rows={cart}
-            columns={orderViewCartColumns}
-            showPagination={false}
-          />
-        </Row>
+        <OrderContent
+          address={address}
+          items={cart}
+          readOnly={false}
+          handleChange={handleChange}
+          validations={validations}
+        />
       </Form>
     </Container>
   );

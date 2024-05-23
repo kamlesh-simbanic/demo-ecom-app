@@ -1,7 +1,5 @@
 import { getProduct } from "@/app/_actions/product";
 import Content from "@/app/_components/products/Details";
-import { Suspense } from "react";
-import Products from "../page";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 

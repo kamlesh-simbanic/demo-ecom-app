@@ -42,8 +42,8 @@ function useUserService(): IUserService {
       }
     },
     logout: async () => {
-      router.replace("/signin");
       await fetch.post("/api/account/logout");
+      router.replace("/signin");
     },
     register: async (user) => {
       try {
