@@ -1,6 +1,7 @@
 import Button from "@/app/_components/button";
 import { useShoppingCart } from "../providers/cart";
 import Link from "next/link";
+import { ColumnType } from "../types/common";
 
 export type CartItem = {
   productId: string;
@@ -9,13 +10,6 @@ export type CartItem = {
   price: number;
   total: number;
   soldOut?: boolean;
-};
-
-type ColumnType<T> = {
-  key: string;
-  label: string;
-  sortable?: boolean;
-  Render?: (value: T) => JSX.Element;
 };
 
 export const cartColumns: ColumnType<CartItem>[] = [

@@ -1,6 +1,14 @@
 import RenderDate from "@/app/_components/RenderDate";
-import { NavLink } from "../_components";
 import Link from "next/link";
+import { ColumnType } from "../types/common";
+
+export type OrderItems = {
+  productId: string;
+  quantity: number;
+  price: number;
+  name: string;
+  total: number;
+};
 
 export type Order = {
   id: number;
@@ -13,13 +21,7 @@ export type Order = {
   province: string;
   postalCode: string;
   createdAt?: string;
-  items: {
-    productId: string;
-    quantity: number;
-    price: number;
-    name: string;
-    total: number;
-  }[];
+  items: OrderItems[];
 };
 
 export type OrderListEntity = Pick<
@@ -28,13 +30,6 @@ export type OrderListEntity = Pick<
 >;
 
 export type OrderPayload = Pick<Order, "items" | "amount">;
-
-type ColumnType<T> = {
-  key: keyof T;
-  label: string;
-  sortable?: boolean;
-  Render?: (value: T) => JSX.Element;
-};
 
 export const orderColumns: ColumnType<OrderListEntity>[] = [
   {
