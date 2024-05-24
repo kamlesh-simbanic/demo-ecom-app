@@ -2,31 +2,16 @@
 
 import { Product, ProductPayload } from "@/app/assets/products";
 import { revalidatePath } from "next/cache";
-import { productRepo } from "@/app/_helpers/server/product-repo";
+import { db } from "@/app/_helpers/server";
 import { validateProduct } from "./add/helper";
-import { redirect } from "next/navigation";
+
+const ProductModel = db.Product;
 
 export const addProduct = async (prevState: any, formData: ProductPayload) => {
-  // const payload: ProductPayload = {
-  //   name: formData.get("name") as string,
-  //   price: parseInt(formData.get("price") as string),
-  //   quantity: parseInt(formData.get("quantity") as string),
-  //   shortDesc: formData.get("shortDesc") as string,
-  //   imageUrl: "",
-  // };
-
-  // const { errors, isValid } = validateProduct(payload);
-
-  // if (!isValid) return { validations: errors, success: "" };
-
-  // const result = await productRepo.create(formData);
-  // console.log("result", result.error);
-  // revalidatePath(`/app/products`);
-  // return { success: "Product Saved Successfully" };
-  // redirect(`/app/products`);
-
   try {
-    await productRepo.create(formData);
+    const product = new ProductModel(formData);
+    const result = await ProductModel.insertMany([product]);
+    revalidatePath(`/app/products`);
     return { success: "Product Saved Successfully", error: "" };
   } catch (error: any) {
     if (error.code === 11000) {
@@ -41,7 +26,68 @@ export const addProduct = async (prevState: any, formData: ProductPayload) => {
 };
 
 export const getProduct = async (id: string) => {
-  const result = await productRepo.getById(id);
-  revalidatePath(`/app/products`);
+  const result = await ProductModel.findById(id);
   return result as Product;
 };
+
+export const getProducts = async () => {
+  const result = await ProductModel.find();
+  return result as Product[];
+};
+
+export const updateProduct = async (
+  prevState: any,
+  // id: string,
+  formData: FormData
+) => {
+  const id = formData.get("id") as string;
+  const payload: ProductPayload = {
+    name: formData.get("name") as string,
+    price: parseInt(formData.get("price") as string),
+    quantity: parseInt(formData.get("quantity") as string),
+    shortDesc: formData.get("shortDesc") as string,
+    imageUrl: "",
+  };
+
+  console.log("payload", payload);
+
+  const { errors, isValid } = validateProduct(payload);
+
+  if (!isValid) return { validations: errors, success: "", error: "" };
+
+  const product = await ProductModel.findById(id);
+
+  if (!product) return { error: "not found" };
+
+  const result = await ProductModel.findByIdAndUpdate(
+    id,
+    { $set: payload },
+    { new: true }
+  );
+
+  revalidatePath(`/app/products`);
+  return { success: "Product Saved Successfully", error: "" };
+};
+
+export const removeProduct = async (id: string) => {
+  await ProductModel.findByIdAndDelete(id);
+  revalidatePath(`/app/products`);
+};
+
+// const payload: ProductPayload = {
+//   name: formData.get("name") as string,
+//   price: parseInt(formData.get("price") as string),
+//   quantity: parseInt(formData.get("quantity") as string),
+//   shortDesc: formData.get("shortDesc") as string,
+//   imageUrl: "",
+// };
+
+// const { errors, isValid } = validateProduct(payload);
+
+// if (!isValid) return { validations: errors, success: "" };
+
+// const result = await productRepo.create(formData);
+// console.log("result", result.error);
+// revalidatePath(`/app/products`);
+// return { success: "Product Saved Successfully" };
+// redirect(`/app/products`);

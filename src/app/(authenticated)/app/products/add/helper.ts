@@ -8,7 +8,11 @@ export const validateProduct = (product: ProductPayload) => {
     errors.name = "Name is required";
   }
 
-  if (product.price === undefined || product.price <= 0) {
+  if (
+    product.price === undefined ||
+    isNaN(product.price) ||
+    product.price <= 0
+  ) {
     errors.price = "Price must be a positive number";
   }
 
@@ -16,7 +20,11 @@ export const validateProduct = (product: ProductPayload) => {
     errors.shortDesc = "Short description is required";
   }
 
-  if (product.quantity === undefined || product.quantity <= 0) {
+  if (
+    product.quantity === undefined ||
+    isNaN(product.quantity) ||
+    product.quantity <= 0
+  ) {
     errors.quantity = "Quantity must be a positive number";
   }
 

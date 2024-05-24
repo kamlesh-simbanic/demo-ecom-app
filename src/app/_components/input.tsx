@@ -38,6 +38,7 @@ const Input: React.FC<InputProps> = ({
         disabled={disabled}
         readOnly={readOnly}
         size="sm"
+        defaultValue={value}
       />
       {error && <span className="text-danger">{error}</span>}
     </Form.Group>

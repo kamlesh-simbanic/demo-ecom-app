@@ -1,6 +1,6 @@
 "use client";
 
-import { addProduct } from "../actions";
+import { addProduct, updateProduct } from "../actions";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { ErrorValidation } from "@/app/types/common";
 import StackRow from "@/app/_components/stack-row";
@@ -8,10 +8,10 @@ import SubmitButton from "@/app/_components/SubmitButton";
 import Image from "next/image";
 import Input from "@/app/_components/input";
 import { useFormState } from "react-dom";
-import { ProductPayload } from "@/app/assets/products";
 import { validateProduct } from "./helper";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { createFormData } from "@/app/utils/misc";
 
 const initialState = {
   validations: {},
@@ -25,15 +25,15 @@ export default function ProductAdd() {
   const [state, formAction] = useFormState(addProduct, initialState);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // let validations: ErrorValidation = state?.validations || {};
   let validations: ErrorValidation = appState?.validations || {};
 
   const saveProduct = (formData: FormData) => {
-    const payload: ProductPayload = {
-      name: formData.get("name") as string,
-      price: parseInt(formData.get("price") as string),
-      quantity: parseInt(formData.get("quantity") as string),
-      shortDesc: formData.get("shortDesc") as string,
+    const data = createFormData(formData);
+    const payload = {
+      name: data.getStringField("name"),
+      price: data.getNumberField("price"),
+      quantity: data.getNumberField("quantity"),
+      shortDesc: data.getStringField("shortDesc"),
       imageUrl: "",
     };
     const { errors, isValid } = validateProduct(payload);
