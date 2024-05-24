@@ -3,6 +3,7 @@
 import { Product } from "@/app/assets/products";
 import { revalidatePath } from "next/cache";
 import axios from "./axios";
+import { productRepo } from "../_helpers/server";
 
 export const getProduct = async (id: string): Promise<Product> => {
   try {

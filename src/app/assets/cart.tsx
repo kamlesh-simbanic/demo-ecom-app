@@ -23,6 +23,11 @@ export const cartColumns: ColumnType<CartItem>[] = [
           <Link
             href={`/app/products/${item.productId}`}
             className="text-decoration-none"
+            onClick={(e) => {
+              if (item.soldOut) {
+                e.preventDefault();
+              }
+            }}
           >
             {item.name}
           </Link>{" "}

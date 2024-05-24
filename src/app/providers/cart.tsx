@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  Suspense,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Product } from "../assets/products";
 import { CartItem } from "../assets/cart";
 import useEvent from "../utils/use-event";
@@ -127,7 +121,7 @@ export const ShoppingCartProvider = ({ children }: any) => {
       await items.reduce(async (previousPromise, item) => {
         await previousPromise;
         const result = await getProduct(item.productId);
-        if (result.quantity > 0) {
+        if (result?.quantity > 0) {
           cartItems.push(item);
         } else cartItems.push({ ...item, soldOut: true });
       }, Promise.resolve());

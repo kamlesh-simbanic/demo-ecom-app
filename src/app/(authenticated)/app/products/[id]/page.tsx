@@ -1,5 +1,4 @@
-import { Col, Row } from "react-bootstrap";
-import { getProduct } from "@/app/_actions/product";
+import { getProduct } from "../actions";
 import Content from "@/app/_components/products/Details";
 import Link from "next/link";
 import { Metadata, ResolvingMetadata } from "next";

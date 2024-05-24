@@ -13,6 +13,7 @@ export default function Cart() {
   return (
     <>
       <h1>Cart</h1>
+
       <TableComponent<CartItem>
         rows={cart}
         columns={cartColumns}

@@ -1,7 +1,7 @@
-import { Product } from "@/app/assets/products";
+import { ProductPayload } from "@/app/assets/products";
 import { ErrorValidation } from "@/app/types/common";
 
-export const validateProduct = (product: Product) => {
+export const validateProduct = (product: ProductPayload) => {
   const errors: ErrorValidation = {};
 
   if (!product.name) {

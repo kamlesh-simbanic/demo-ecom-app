@@ -1,5 +1,7 @@
 import { Button } from "react-bootstrap";
 
+import { useFormStatus } from "react-dom";
+
 const SubmitButton = ({
   variant = "primary",
   label = "Submit",
@@ -9,10 +11,17 @@ const SubmitButton = ({
   variant?: string;
   disabled?: boolean;
 }) => {
+  const { pending } = useFormStatus();
+
   return (
     <>
-      <Button type="submit" variant={variant} disabled={disabled}>
-        {label}
+      <Button
+        type="submit"
+        variant={variant}
+        disabled={disabled}
+        aria-disabled={pending}
+      >
+        {pending ? "Submitting" : label}
       </Button>
     </>
   );
