@@ -37,6 +37,8 @@ export default async function ProductDetails({
 
   return (
     <>
+      <h3>{product.name}</h3>
+
       <Content product={product} readOnly={true} />
       <StackRow>
         <Link

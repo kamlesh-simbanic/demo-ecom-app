@@ -32,6 +32,7 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
 
   const [product, setProduct] = useState<Product>(initialProduct);
   const [state, formAction] = useFormState(updateProduct, initialState);
+  const titie = useRef<string>("");
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -47,6 +48,7 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
   const loadProduct = async (id: string) => {
     const result = await getProduct(id);
     setProduct(result);
+    titie.current = result.name;
   };
 
   const deleteProduct = async () => {
@@ -81,6 +83,7 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
       {state!.error!.length > 0 && (
         <p className="text-danger">{state!.error}</p>
       )}
+      <h3>{titie.current}</h3>
       <Form ref={formRef} action={formAction} autoComplete="off">
         <Container>
           <Input type="hidden" value={id} name="id" />
