@@ -1,6 +1,6 @@
 import { error } from "console";
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Col, Form } from "react-bootstrap";
 import { Label } from "reactstrap";
 
 interface InputProps {
@@ -27,6 +27,7 @@ const Input: React.FC<InputProps> = ({
   disabled,
 }) => {
   return (
+    // <Col lg={6}>
     <Form.Group controlId={name}>
       {Label.length > 0 && <Form.Label>{label}</Form.Label>}
       <Form.Control
@@ -42,6 +43,7 @@ const Input: React.FC<InputProps> = ({
       />
       {error && <span className="text-danger">{error}</span>}
     </Form.Group>
+    // </Col>
   );
 };
 

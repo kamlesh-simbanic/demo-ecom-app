@@ -56,6 +56,11 @@ function NavbarComponent({ isAuthenticated }: any) {
                     Orders
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" href="/app/opportunities">
+                    Opportunities
+                  </NavLink>
+                </li>
                 <li>
                   <LogoutButton />
                 </li>
