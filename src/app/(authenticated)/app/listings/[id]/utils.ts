@@ -1,5 +1,5 @@
 export enum Tabs {
-  Overview = "",
+  Overview = "Overview",
   AccessIssues = "AccessIssues",
   Access = "Access",
   Offers = "Offers",

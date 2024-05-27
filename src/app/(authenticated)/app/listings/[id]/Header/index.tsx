@@ -15,9 +15,6 @@ const Header = async ({ id }: any) => {
   }, [pathname]);
 
   const onTabChange = (newTab: string) => {
-    console.log("newTab", newTab);
-    console.log("URLs[newTab]", URLs[newTab]);
-
     setActiveTab(newTab);
     router.push(`/app/listings/${id}${URLs[newTab]}`);
   };

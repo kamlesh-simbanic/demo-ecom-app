@@ -1,7 +1,8 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Column, Columns } from "./styles";
 import PriceTimeLine from "./PriceTimeLine";
 import RecentOfferComparison from "./RecentOfferComparison";
+import Snapshot from "./SnapShot";
 
 type Props = {
   params: { id: string };
@@ -10,14 +11,15 @@ type Props = {
 const Page = async ({ params }: Props) => {
   return (
     <Container fluid className="mt-5">
-      <Columns>
-        <Column>
+      <Row>
+        <Col lg={8}>
           <PriceTimeLine />
-        </Column>
-        <Column>
+          <Snapshot listingId={params.id} />
+        </Col>
+        <Col lg={4}>
           <RecentOfferComparison />
-        </Column>
-      </Columns>
+        </Col>
+      </Row>
     </Container>
   );
 };
