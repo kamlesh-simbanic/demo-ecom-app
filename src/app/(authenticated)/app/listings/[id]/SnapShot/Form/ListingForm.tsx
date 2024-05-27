@@ -46,9 +46,9 @@ const ListingForm = ({ listingId, snapshotDetails }: any) => {
       <Card className="p-3">
         <Header>
           <Title>
-            <h3>Listing details snapshot</h3>
+            <h4 className="fw-bolder">Listing details snapshot</h4>
           </Title>
-          <Link href={`/listings/${listingId}/listing-details`}>
+          <Link href={`/app/listings/${listingId}/listing-details`}>
             <Button variant="outlined" color="secondary">
               View all fields
             </Button>
