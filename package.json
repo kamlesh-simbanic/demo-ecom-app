@@ -9,11 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.18",
+    "@mui/material": "^5.15.18",
     "@types/react-slick": "^0.23.13",
     "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "client-only": "^0.0.1",
+    "dayjs": "^1.11.11",
     "joi": "^17.12.3",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
@@ -29,6 +34,7 @@
     "reactstrap": "^9.2.2",
     "server-only": "^0.0.1",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.11",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

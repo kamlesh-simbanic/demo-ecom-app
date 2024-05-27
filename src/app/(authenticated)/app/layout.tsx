@@ -22,7 +22,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="app-container bg-light">
+    <div className=" bg-light">
       <header>
         <NavbarComponent isAuthenticated={isAuthenticated} />
       </header>
@@ -30,7 +30,9 @@ function Layout({ children }: { children: React.ReactNode }) {
       <main className="p-5">
         <DeleteModal />
         <Snackbar />
-        <Container className="mt-5">{children}</Container>
+        <Container fluid className="mt-5">
+          {children}
+        </Container>
       </main>
     </div>
   );
