@@ -9,9 +9,10 @@ import Header from "./Header";
 import { ListingProvider } from "./ListingProvider";
 // import Notes from "./Notes";
 // import { Note } from "./Notes/types";
-import { ListingHeader, ListingStatus } from "./types";
+import { ListingHeader } from "./types";
 import { Body } from "./styles";
 import { listingHeader } from "@/app/assets/opportunity/details";
+import { ListingStatus } from "../types";
 
 type Props = {
   children: ReactNode;

@@ -12,7 +12,7 @@ export const opportunityColumns: ColumnType<OpportunityListEntity>[] = [
     Render: (item) => {
       return (
         <Link
-          href={`/app/opportunities/${item.id}`}
+          href={`/app/listings/${item.id}`}
           className="text-decoration-none"
         >
           {item.name}
