@@ -16,3 +16,15 @@ const getDateWithoutTimezone = (date: string) => {
 
   return date;
 };
+
+export const formatDate = (
+  date: string | number | dayjs.Dayjs | Date | null | undefined,
+  formatPattern: string,
+  defaultReturn = ""
+): string => {
+  const formattedDate = dayjs(date).format(formatPattern);
+
+  return !date || formattedDate === "Invalid Date"
+    ? defaultReturn
+    : formattedDate;
+};
