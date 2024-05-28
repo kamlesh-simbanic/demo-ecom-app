@@ -110,7 +110,6 @@ const ListingForm = ({ listingId, snapshotDetails }: any) => {
                   required: status === "Evaluation Preparation",
                 }}
                 label="Evaluation requested date"
-                as={CurrencyInput}
                 error={""}
                 isInvalid={status === "Evaluation Preparation"}
                 disable={true}
