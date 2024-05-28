@@ -1,5 +1,25 @@
-const ListingDetailsPage = () => {
-  return <h1>ListingDetailsPage</h1>;
+import { Card } from "@mui/material";
+
+import Form from "./Form";
+import {
+  listingDetails,
+  listingDetailsOptions,
+} from "@/app/assets/opportunity/details";
+
+type Props = {
+  params: { id: string };
+};
+
+const ListingDetailsPage = async ({ params }: Props) => {
+  return (
+    <Card>
+      <Form
+        listingDetails={listingDetails}
+        listingId={params.id}
+        options={listingDetailsOptions}
+      />
+    </Card>
+  );
 };
 
 export default ListingDetailsPage;
