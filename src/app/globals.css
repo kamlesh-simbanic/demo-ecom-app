@@ -115,3 +115,11 @@ a {
 .image-slider-container .slick-next:before {
   color: black;
 }
+
+.sticky-container {
+  position: fixed; /* For Safari */
+  position: sticky;
+  top: 0; /* Adjust as needed */
+  z-index: 1000; /* Adjust to ensure it's on top of other elements */
+  background-color: white; /* Ensure it has a background color */
+}

@@ -1,9 +1,9 @@
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { Container } from "react-bootstrap";
+
 import { Tabs, Tab } from "react-bootstrap";
-import { Tabs as TabsT, URLs, getTab } from "../utils";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { URLs, getTab } from "../utils";
+import { useEffect, useState } from "react";
 import { Breadcrumb, Button } from "react-bootstrap";
 
 const Header = async ({ id, listing }: any) => {
