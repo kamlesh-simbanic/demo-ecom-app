@@ -12,7 +12,7 @@ type Props = {
 
 const ListingDetailsPage = async ({ params }: Props) => {
   return (
-    <Card>
+    <Card className="p-2">
       <Form
         listingDetails={listingDetails}
         listingId={params.id}
