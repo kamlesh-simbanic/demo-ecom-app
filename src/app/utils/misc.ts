@@ -17,3 +17,32 @@ export const createFormData = (formData: FormData) => {
     },
   };
 };
+
+export const formatNumber = (
+  value: number,
+  defaultValue = "N/A"
+): number | string =>
+  value ? new Intl.NumberFormat("en-US").format(value) : defaultValue;
+
+type NumberOptions = {
+  locales: string;
+  currency: string;
+  minDecimals: number;
+  maxDecimals: number;
+};
+
+export const currencyFormat = (
+  value: number,
+  options: NumberOptions = {
+    locales: "en-US",
+    currency: "USD",
+    minDecimals: 0,
+    maxDecimals: 2,
+  }
+) =>
+  new Intl.NumberFormat(options.locales, {
+    style: "currency",
+    currency: options.currency,
+    minimumFractionDigits: options.minDecimals,
+    maximumFractionDigits: options.maxDecimals,
+  }).format(value);

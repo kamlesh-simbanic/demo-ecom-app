@@ -1,13 +1,24 @@
+// export enum Tabs {
+//   Overview = "Overview",
+//   AccessIssues = "AccessIssues",
+//   Access = "Access",
+//   Offers = "Offers",
+//   Services = "Services",
+//   ListingDetails = "ListingDetails",
+//   PropertyDetails = "PropertyDetails",
+//   ListingEngagement = "ListingEngagement",
+//   Commissions = "Commissions",
+// }
 export enum Tabs {
-  Overview = "Overview",
-  AccessIssues = "AccessIssues",
-  Access = "Access",
-  Offers = "Offers",
-  Services = "Services",
-  ListingDetails = "ListingDetails",
-  PropertyDetails = "PropertyDetails",
-  ListingEngagement = "ListingEngagement",
-  Commissions = "Commissions",
+  Overview = 0,
+  AccessIssues = 1,
+  Access = 2,
+  Offers = 3,
+  Services = 4,
+  ListingDetails = 5,
+  PropertyDetails = 6,
+  ListingEngagement = 7,
+  Commissions = 8,
 }
 
 export const URLs: { [tab: string]: string } = {
