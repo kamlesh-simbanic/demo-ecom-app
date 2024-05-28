@@ -50,13 +50,13 @@ export const BreadcrumbWrapper = styled("div")`
 `;
 
 export const BreadcrumbLink = styled(Link)`
-  color: blue;
+  color: black;
   line-height: 1;
   text-decoration: underline;
 `;
 
 export const BreadcrumbText = styled(Typography)`
-  color: blue;
+  color: black;
   margin: 0;
 `;
 
@@ -94,7 +94,7 @@ export const StyledImage = styled(Image)`
 `;
 
 export const Summary = styled(Typography)`
-  color: blue;
+  color: black;
   display: flex;
   align-items: center;
   gap: 16px;
