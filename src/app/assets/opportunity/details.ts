@@ -10,3 +10,43 @@ export const listingEngagement = {
   syndicationLastCollected: "2024-05-27",
   syndicationLink: "eos umerus verbum",
 };
+
+export const commissionsAndExpenses = {
+  commissions: {
+    listingSideCommissionType: "flat_fee",
+    listingSideCommissionPercentage: null,
+    listingSideFlatFee: "3.0",
+    buyingSideCommissionType: "flat_fee",
+    buyingSideCommissionPercentage: null,
+    buyingSideFlatFee: "0.0",
+    commissionsFinalizedDate: "2024-02-15",
+    notes: "",
+    listingSideGrossCommission: "3.0",
+    listingSideTotalCommissionReduction: "9.0",
+    listingSideNetCommission: "-6.0",
+    buyingSideGrossCommission: "0.0",
+    totalReimbursableExpensesOnHud: "0.0",
+    totalCommissionPercentage: "0.0",
+    totalCommissionAmount: "3.0",
+    // reductionsAttributes: [[Object], [Object], [Object], [Object]],
+  },
+  options: {
+    commission: {
+      buyingSideCommissionType: [
+        { value: "percentage", label: "Percentage" },
+        { value: "flat_fee", label: "Flat Fee" },
+      ],
+      listingSideCommissionType: [
+        { value: "percentage", label: "Percentage" },
+        { value: "flat_fee", label: "Flat Fee" },
+      ],
+    },
+    reductionsAttributes: {
+      listingSideCommissionReductionType: [
+        { value: "hud_concession", label: "HUD Concession" },
+        { value: "technology_fee", label: "Technology Fee" },
+        { value: "referral_fee", label: "Referral Fee" },
+      ],
+    },
+  },
+};
