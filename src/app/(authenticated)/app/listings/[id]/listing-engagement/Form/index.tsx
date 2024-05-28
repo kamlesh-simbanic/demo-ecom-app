@@ -1,12 +1,10 @@
 "use client";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { Row, Title, Wrapper } from "./styles";
 import { TextField } from "@mui/material";
-import CustomDatePicker from "@/app/_components/ControllerDatePicker";
-import CustomTextField from "@/app/_components/CustomTextField";
 import dayjs, { Dayjs } from "dayjs";
 import { getIsoDate } from "@/app/utils/date-utils";
 
