@@ -6,6 +6,7 @@ import { URLs, getTab, Tabs as TabsT } from "../utils";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Breadcrumb, Button } from "react-bootstrap";
 import { FormControl, Tabs, Tooltip } from "@mui/material";
+import Illustration from "@/app/assets/img/listing-illustration.png";
 
 import {
   Address,
@@ -91,12 +92,12 @@ const Header = async ({ id, listing }: any) => {
       <Content role="complementary">
         <Info>
           <ImageHolder>
-            {/* <StyledImage
+            <StyledImage
               src={Illustration}
               alt={`${listing?.opportunityAttributes?.streetAddress}, ${listing?.opportunityAttributes?.city}, ${listing?.opportunityAttributes?.state} ${listing?.opportunityAttributes?.zip}`}
               width={78}
               height={78}
-            /> */}
+            />
           </ImageHolder>
           <div>
             <Tooltip
