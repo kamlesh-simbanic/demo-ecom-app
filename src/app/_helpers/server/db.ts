@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 
 mongoose.connect(process.env.MONGODB_URI!).then(() => {
   console.log("Database connected");
-  
 });
 mongoose.Promise = global.Promise;
 

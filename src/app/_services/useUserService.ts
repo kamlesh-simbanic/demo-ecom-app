@@ -110,7 +110,7 @@ function useUserService(): IUserService {
 
 // interfaces
 
-interface IUser {
+export interface IUser {
   id: string;
   name: string;
   email: string;
@@ -127,7 +127,7 @@ interface IUserStore {
 interface IUserService extends IUserStore {
   login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  register: (user: IUser) => Promise<void>;
+  register: (user: IUser) => Promise<any>;
   getAll: () => Promise<void>;
   getById: (id: string) => Promise<void>;
   getCurrent: () => Promise<void>;
