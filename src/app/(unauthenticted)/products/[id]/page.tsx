@@ -14,7 +14,6 @@ export async function generateMetadata(
   const product = await getProduct(params.id);
 
   if (!product) {
-    // throw new Error(`Product Not Found with ${params.id}`);
     notFound();
   }
 
