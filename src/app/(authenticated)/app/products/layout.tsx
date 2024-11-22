@@ -1,11 +1,3 @@
-export default function Layout(props: {
-  modal: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  return (
-    <>
-      {props.modal}
-      {props.children}
-    </>
-  );
+export default function Layout(props: { children: React.ReactNode }) {
+  return <>{props.children}</>;
 }

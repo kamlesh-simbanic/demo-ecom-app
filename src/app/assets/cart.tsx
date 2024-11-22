@@ -1,5 +1,5 @@
 import Button from "@/app/_components/button";
-import { useShoppingCart } from "../providers/cart";
+import { useShoppingCart } from "../providers/context";
 import Link from "next/link";
 import { ColumnType } from "../types/common";
 

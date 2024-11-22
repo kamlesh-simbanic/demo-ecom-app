@@ -1,7 +1,7 @@
 "use client";
 
 import { addOrder } from "@/app/_actions/orders";
-import { useShoppingCart } from "@/app/providers/cart";
+import { useShoppingCart } from "@/app/providers/context";
 import useEvent from "@/app/utils/use-event";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";

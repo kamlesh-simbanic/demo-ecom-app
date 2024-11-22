@@ -4,7 +4,7 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { Product } from "../../assets/products";
 import Link from "next/link";
-import { useShoppingCart } from "../../providers/cart";
+import { useShoppingCart } from "../../providers/context";
 import Image from "next/image";
 
 const imageSize = { width: 250, height: 200 };

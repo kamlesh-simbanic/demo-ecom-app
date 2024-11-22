@@ -4,31 +4,7 @@ import { Product } from "../assets/products";
 import { CartItem } from "../assets/cart";
 import useEvent from "../utils/use-event";
 import { getProduct } from "../_actions/product";
-
-type ShoppingCartContextType = {
-  cart: CartItem[];
-  addItem: (item: Product) => void;
-  removeItem: (id: string) => void;
-  increment: (id: string) => void;
-  decrement: (id: string) => void;
-  totalItems: number;
-  removeOrderedItems: (id: string[]) => void;
-  enableCheckout: () => boolean;
-};
-
-const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(
-  undefined
-);
-
-export const useShoppingCart = () => {
-  const context = useContext(ShoppingCartContext);
-  if (!context) {
-    throw new Error(
-      "useShoppingCart must be used within a ShoppingCartProvider"
-    );
-  }
-  return context;
-};
+import { ShoppingCartContext } from "./context";
 
 export const ShoppingCartProvider = ({ children }: any) => {
   const { dispatch } = useEvent();

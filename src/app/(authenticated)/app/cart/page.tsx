@@ -1,7 +1,7 @@
 "use client";
 import { CartItem, cartColumns } from "@/app/assets/cart";
 import TableComponent from "@/app/_components/table";
-import { useShoppingCart } from "@/app/providers/cart";
+import { useShoppingCart } from "@/app/providers/context";
 import Button from "@/app/_components/button";
 import { useRouter } from "next/navigation";
 import StackRow from "@/app/_components/stack-row";

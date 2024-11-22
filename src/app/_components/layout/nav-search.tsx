@@ -1,6 +1,6 @@
 "use client";
 
-import { useShoppingCart } from "@/app/providers/cart";
+import { useShoppingCart } from "@/app/providers/context";
 import Link from "next/link";
 import { useState } from "react";
 import { Form, FormControl } from "react-bootstrap";

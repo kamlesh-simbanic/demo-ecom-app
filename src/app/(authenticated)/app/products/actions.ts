@@ -4,14 +4,17 @@ import { Product, ProductPayload } from "@/app/assets/products";
 import { revalidatePath } from "next/cache";
 import { db } from "@/app/_helpers/server";
 import { validateProduct } from "./add/helper";
+import axios from "@/app/_actions/axios";
 
 const ProductModel = db.Product;
 
 export const addProduct = async (prevState: any, formData: ProductPayload) => {
   try {
-    const product = new ProductModel(formData);
-    const result = await ProductModel.insertMany([product]);
-    revalidatePath(`/app/products`);
+    // const product = new ProductModel(formData);
+    // const result = await ProductModel.insertMany([product]);
+    const res = await axios.post(`/products`, formData);
+    const result = await res.json();
+    // revalidatePath(`/app/products`);
     return { success: "Product Saved Successfully", error: "" };
   } catch (error: any) {
     if (error.code === 11000) {
@@ -31,7 +34,9 @@ export const getProduct = async (id: string) => {
 };
 
 export const getProducts = async () => {
-  const result = await ProductModel.find();
+  // const result = await ProductModel.find();
+  const res = await axios.get(`/products`);
+  const result = await res.json();
   return result as Product[];
 };
 
@@ -55,23 +60,25 @@ export const updateProduct = async (
 
   if (!isValid) return { validations: errors, success: "", error: "" };
 
-  const product = await ProductModel.findById(id);
+  // const product = await ProductModel.findById(id);
 
-  if (!product) return { error: "not found" };
+  // if (!product) return { error: "not found" };
 
-  const result = await ProductModel.findByIdAndUpdate(
-    id,
-    { $set: payload },
-    { new: true }
-  );
+  // const result = await ProductModel.findByIdAndUpdate(
+  //   id,
+  //   { $set: payload },
+  //   { new: true }
+  // );
+  const res = await axios.put(`/products/${id}`, payload);
+  const result = await res.json();
 
-  revalidatePath(`/app/products`);
+  // revalidatePath(`/app/products`);
   return { success: "Product Saved Successfully", error: "" };
 };
 
 export const removeProduct = async (id: string) => {
   await ProductModel.findByIdAndDelete(id);
-  revalidatePath(`/app/products`);
+  // revalidatePath(`/app/products`);
 };
 
 // const payload: ProductPayload = {

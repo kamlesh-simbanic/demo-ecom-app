@@ -66,7 +66,7 @@ export default function ProductEdit({ params }: { params: { id: string } }) {
       if (formRef.current) {
         formRef.current.reset();
       }
-      router.replace(`/app/products/${id}`);
+      router.push(`/app/products/${id}`);
       dispatch("SHOW_SNACK_BAR", state.success);
     }
   }, [id, router, state.success]);
