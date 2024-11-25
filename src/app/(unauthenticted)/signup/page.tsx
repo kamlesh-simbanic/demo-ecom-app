@@ -91,7 +91,7 @@ export default function SignUp() {
 
         <Input
           register={{ ...register("email", registerOptions.email) }}
-          label="Email"
+          label="Email*"
           name="email"
           rules={registerOptions.email}
           error={getErrorMessage("email")}
